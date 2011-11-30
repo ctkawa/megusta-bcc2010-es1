@@ -32,16 +32,42 @@ public class ApplicationFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jBarraMenu = new javax.swing.JMenuBar();
-        jMenuArquivo = new javax.swing.JMenu();
+        jMenuItemArquivo = new javax.swing.JMenu();
+        jMenuItemFuncionario = new javax.swing.JMenuItem();
+        jMenuItemSair = new javax.swing.JMenuItem();
+        jMenuItemEditar = new javax.swing.JMenu();
         jMenuEditar = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenuArquivo.setText("Arquivo");
-        jBarraMenu.add(jMenuArquivo);
+        jMenuItemArquivo.setText("Arquivo");
 
-        jMenuEditar.setText("Editar");
-        jBarraMenu.add(jMenuEditar);
+        jMenuItemFuncionario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, 0));
+        jMenuItemFuncionario.setText("Funcionario");
+        jMenuItemFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFuncionarioActionPerformed(evt);
+            }
+        });
+        jMenuItemArquivo.add(jMenuItemFuncionario);
+
+        jMenuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, 0));
+        jMenuItemSair.setText("Sair");
+        jMenuItemSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSairActionPerformed(evt);
+            }
+        });
+        jMenuItemArquivo.add(jMenuItemSair);
+
+        jBarraMenu.add(jMenuItemArquivo);
+
+        jMenuItemEditar.setText("Editar");
+
+        jMenuEditar.setText("jMenu2");
+        jMenuItemEditar.add(jMenuEditar);
+
+        jBarraMenu.add(jMenuItemEditar);
 
         setJMenuBar(jBarraMenu);
 
@@ -59,6 +85,16 @@ public class ApplicationFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItemSairActionPerformed
+
+    private void jMenuItemFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFuncionarioActionPerformed
+        FuncionarioUI pnlFunc = new FuncionarioUI();
+        setContentPane(pnlFunc);
+        validate();
+    }//GEN-LAST:event_jMenuItemFuncionarioActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -72,8 +108,11 @@ public class ApplicationFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jBarraMenu;
-    private javax.swing.JMenu jMenuArquivo;
     private javax.swing.JMenu jMenuEditar;
+    private javax.swing.JMenu jMenuItemArquivo;
+    private javax.swing.JMenu jMenuItemEditar;
+    private javax.swing.JMenuItem jMenuItemFuncionario;
+    private javax.swing.JMenuItem jMenuItemSair;
     // End of variables declaration//GEN-END:variables
 
 }

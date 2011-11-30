@@ -13,7 +13,11 @@ import megusta.model.Entity;
 public abstract class ApplicationControl {
     public abstract boolean salvar(Entity entity);
 
+    public abstract boolean atualizar(Entity entity);
+
     public abstract boolean excluir(Entity entity);
 
-    public abstract Entity pesquisar(String key);
+    public abstract Entity pesquisar(int id);
+
+    public abstract String[][] pesquisar(String condicao);
 }
