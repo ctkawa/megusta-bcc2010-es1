@@ -5,8 +5,6 @@
 
 package megusta.model;
 
-import java.util.Date;
-
 /**
  *
  * @author cleber
@@ -15,13 +13,29 @@ public class Funcionario extends Entity{
     private int id;
     private String nome;
     private String rg;
-    private int telefone;
+    private String telefone;
 
-    public Funcionario(int id, String nome, String rg, int telefone) {
+    public Funcionario(int id, String nome, String rg, String telefone) {
         this.id = id;
         this.nome = nome;
         this.rg = rg;
         this.telefone = telefone;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getRg() {
@@ -32,30 +46,14 @@ public class Funcionario extends Entity{
         this.rg = rg;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
+    
 
 }
