@@ -11,7 +11,7 @@ package megusta.persistence;
  */
 class Conexao {
 private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost/locadora";
+    private static final String URL = "jdbc:mysql://localhost/megusta";
     private static final String USER = "root";
     private static final String PASS = "root";
 

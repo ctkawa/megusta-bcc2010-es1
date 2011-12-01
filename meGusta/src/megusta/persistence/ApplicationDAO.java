@@ -15,4 +15,5 @@ public abstract class ApplicationDAO {
     public Conexao getConexao() {
         return conexao;
     }
+    
 }

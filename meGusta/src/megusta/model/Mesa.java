@@ -11,9 +11,19 @@ package megusta.model;
  */
 public class Mesa extends Entity{
     private int id;
+    private int capacidade;
 
-    public Mesa(int id) {
+    public Mesa(int id, int capacidade) {
         this.id = id;
+        this.capacidade = capacidade;
+    }
+
+    public int getCapacidade() {
+        return capacidade;
+    }
+
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
     }
 
     public int getId() {
@@ -23,6 +33,7 @@ public class Mesa extends Entity{
     public void setId(int id) {
         this.id = id;
     }
+
 
     
 }
