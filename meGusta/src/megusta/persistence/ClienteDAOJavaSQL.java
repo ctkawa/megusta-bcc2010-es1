@@ -28,7 +28,7 @@ public class ClienteDAOJavaSQL extends ClienteDAO{
     
     @Override
     public boolean salvar(Cliente cliente) {
-        String sql = "INSERT INTO cliente (id, nome, rg, telefone, tipo) VALUES("
+        String sql = "INSERT INTO cliente (id, nome, telefone) VALUES("
                 +cliente.getId()+", '"
                 +cliente.getNome()+"', '"
                 +cliente.getTelefone()+"');";
@@ -37,7 +37,7 @@ public class ClienteDAOJavaSQL extends ClienteDAO{
 
     @Override
     public boolean atualizar(Cliente cliente) {
-        String sql = "UPDATE cliente (id, nome, rg, telefone, tipo) VALUES("
+        String sql = "UPDATE cliente (id, nome, telefone) VALUES("
                 +cliente.getId()+", '"
                 +cliente.getNome()+"', '"
                 +cliente.getTelefone()+"');";

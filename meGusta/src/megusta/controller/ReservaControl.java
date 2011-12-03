@@ -35,12 +35,12 @@ public class ReservaControl extends ApplicationControl{
 
     @Override
     public Entity pesquisar(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new ReservaDAOJavaSQL().pesquisar(id);
     }
 
     @Override
     public String[][] pesquisar(String condicao) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new ReservaDAOJavaSQL().pesquisar(condicao);
     }
 
 }

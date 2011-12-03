@@ -11,7 +11,7 @@ import megusta.model.Reserva;
  *
  * @author cleber
  */
-public abstract class ReservaDAO {
+public abstract class ReservaDAO extends ApplicationDAO{
     public abstract boolean salvar(Reserva reserva);
     public abstract boolean atualizar(Reserva reserva);
     public abstract boolean excluir(Reserva reserva);

@@ -11,7 +11,7 @@ import megusta.model.Mesa;
  *
  * @author cleber
  */
-public abstract class MesaDAO {
+public abstract class MesaDAO extends ApplicationDAO{
     public abstract boolean salvar(Mesa mesa);
     public abstract boolean atualizar(Mesa mesa);
     public abstract boolean excluir(Mesa mesa);
