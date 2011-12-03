@@ -28,21 +28,23 @@ public class FuncionarioDAOJavaSQL extends FuncionarioDAO{
     
     @Override
     public boolean salvar(Funcionario funcionario) {
-        String sql = "INSERT INTO funcionario (id, nome, rg, telefone) VALUES("
+        String sql = "INSERT INTO funcionario (id, nome, rg, telefone, tipo) VALUES("
                 +funcionario.getId()+", '"
                 +funcionario.getNome()+"', '"
                 +funcionario.getRg()+"', '"
-                +funcionario.getTelefone()+"');";
+                +funcionario.getTelefone()+"', '"
+                +funcionario.getTipo()+"');";
         return getConexao().executeCommand(sql);
     }
 
     @Override
     public boolean atualizar(Funcionario funcionario) {
-        String sql = "UPDATE funcionario (id, nome, rg, telefone) VALUES("
+        String sql = "UPDATE funcionario (id, nome, rg, telefone, tipo) VALUES("
                 +funcionario.getId()+", '"
                 +funcionario.getNome()+"', '"
                 +funcionario.getRg()+"', '"
-                +funcionario.getTelefone()+"');";
+                +funcionario.getTelefone()+"', '"
+                +funcionario.getTipo()+"');";
         return getConexao().executeCommand(sql);
     }
 
@@ -63,19 +65,21 @@ public class FuncionarioDAOJavaSQL extends FuncionarioDAO{
         String sql = "SELECT * FROM funcionario" +
                 (condicao.equals("") ? ";" : " WHERE " + condicao + ";");
 
-        ResultSet resultSet = getConexao().executeQuery(sql);
+        ConexaoJavaSQL conn = getConexao();
+        ResultSet resultSet = conn.executeQuery(sql);
         List<String[]> funcionarios = new ArrayList<String[]>();
         int numLinhas = 0;
 
         try {
             if(resultSet != null){
                 while(resultSet.next()){
-                    String[] funcionario = new String[4];
+                    String[] funcionario = new String[5];
 
                     funcionario[0] = resultSet.getString("id");
                     funcionario[1] = resultSet.getString("nome");
                     funcionario[2] = resultSet.getString("rg");
                     funcionario[3] = resultSet.getString("telefone");
+                    funcionario[4] = resultSet.getString("tipo");
 
                     funcionarios.add(funcionario);
                     numLinhas++;
@@ -90,7 +94,7 @@ public class FuncionarioDAOJavaSQL extends FuncionarioDAO{
             }
         }
 
-        return funcionarios.toArray(new String[numLinhas][4]);
+        return funcionarios.toArray(new String[numLinhas][5]);
     }
 
 }

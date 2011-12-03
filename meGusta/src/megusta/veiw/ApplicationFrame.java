@@ -92,6 +92,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
     private void jMenuItemFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFuncionarioActionPerformed
         FuncionarioUI pnlFunc = new FuncionarioUI();
         setContentPane(pnlFunc);
+        setSize(800, 600);
         validate();
     }//GEN-LAST:event_jMenuItemFuncionarioActionPerformed
 
