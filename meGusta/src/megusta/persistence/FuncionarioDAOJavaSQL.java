@@ -91,7 +91,7 @@ public class FuncionarioDAOJavaSQL extends FuncionarioDAO{
             }
         }
 
-        return funcionarios.toArray(new String[numLinhas][5]);
+        return funcionarios.toArray(new String[numLinhas][4]);
     }
 
 }

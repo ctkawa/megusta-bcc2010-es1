@@ -35,7 +35,7 @@ public class TipoControl extends ApplicationControl{
 
     @Override
     public Entity pesquisar(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new TipoDAOJavaSQL().pesquisar(id);
     }
 
     @Override

@@ -35,12 +35,12 @@ public class MesaControl extends ApplicationControl{
 
     @Override
     public Entity pesquisar(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new MesaDAOJavaSQL().pesquisar(id);
     }
 
     @Override
     public String[][] pesquisar(String condicao) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new MesaDAOJavaSQL().pesquisar(condicao);
     }
 
 }
