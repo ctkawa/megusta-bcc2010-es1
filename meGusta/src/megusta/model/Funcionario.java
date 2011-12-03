@@ -14,12 +14,14 @@ public class Funcionario extends Entity{
     private String nome;
     private String rg;
     private String telefone;
+    private int tipo;
 
-    public Funcionario(int id, String nome, String rg, String telefone) {
+    public Funcionario(int id, String nome, String rg, String telefone, int tipo) {
         this.id = id;
         this.nome = nome;
         this.rg = rg;
         this.telefone = telefone;
+        this.tipo = tipo;
     }
 
     public int getId() {
@@ -52,6 +54,14 @@ public class Funcionario extends Entity{
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
 
     
