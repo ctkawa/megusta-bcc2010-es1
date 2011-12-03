@@ -42,7 +42,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
 
         jMenuItemArquivo.setText("Arquivo");
 
-        jMenuItemFuncionario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, 0));
+        jMenuItemFuncionario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemFuncionario.setText("Funcionario");
         jMenuItemFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

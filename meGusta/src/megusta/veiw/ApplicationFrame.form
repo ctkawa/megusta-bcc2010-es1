@@ -12,7 +12,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemFuncionario">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="F"/>
+                  <KeyStroke key="Ctrl+F"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Funcionario"/>
               </Properties>

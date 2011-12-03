@@ -28,10 +28,9 @@ public class FuncionarioDAOJavaSQL extends FuncionarioDAO{
     
     @Override
     public boolean salvar(Funcionario funcionario) {
-        String sql = "INSERT INTO funcionario (id, nome, rg, telefone, tipo) VALUES("
-                +funcionario.getId()+", '"
+        String sql = "INSERT INTO funcionario (nome, cpf, telefone, tipo) VALUES("
                 +funcionario.getNome()+"', '"
-                +funcionario.getRg()+"', '"
+                +funcionario.getCpf()+"', '"
                 +funcionario.getTelefone()+"', '"
                 +funcionario.getTipo()+"');";
         return getConexao().executeCommand(sql);
@@ -39,10 +38,9 @@ public class FuncionarioDAOJavaSQL extends FuncionarioDAO{
 
     @Override
     public boolean atualizar(Funcionario funcionario) {
-        String sql = "UPDATE funcionario (id, nome, rg, telefone, tipo) VALUES("
-                +funcionario.getId()+", '"
+        String sql = "UPDATE funcionario (nome, cpf, telefone, tipo) VALUES("
                 +funcionario.getNome()+"', '"
-                +funcionario.getRg()+"', '"
+                +funcionario.getCpf()+"', '"
                 +funcionario.getTelefone()+"', '"
                 +funcionario.getTipo()+"');";
         return getConexao().executeCommand(sql);
@@ -50,8 +48,8 @@ public class FuncionarioDAOJavaSQL extends FuncionarioDAO{
 
     @Override
     public boolean excluir(Funcionario funcionario) {
-        String sql = "DELETE funcionario WHERE (id="
-                +funcionario.getId()+");";
+        String sql = "DELETE funcionario WHERE (cpf="
+                +funcionario.getCpf()+");";
         return getConexao().executeCommand(sql);
     }
 
@@ -73,13 +71,12 @@ public class FuncionarioDAOJavaSQL extends FuncionarioDAO{
         try {
             if(resultSet != null){
                 while(resultSet.next()){
-                    String[] funcionario = new String[5];
+                    String[] funcionario = new String[4];
 
-                    funcionario[0] = resultSet.getString("id");
-                    funcionario[1] = resultSet.getString("nome");
-                    funcionario[2] = resultSet.getString("rg");
-                    funcionario[3] = resultSet.getString("telefone");
-                    funcionario[4] = resultSet.getString("tipo");
+                    funcionario[0] = resultSet.getString("nome");
+                    funcionario[1] = resultSet.getString("cpf");
+                    funcionario[2] = resultSet.getString("telefone");
+                    funcionario[3] = resultSet.getString("tipo");
 
                     funcionarios.add(funcionario);
                     numLinhas++;
