@@ -24,7 +24,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
 
     private static final boolean MODO_EDICAO = true;
 
-    /** Creates new form FuncionarioUI2 */
+    /** CONSTRUTOR  Creates new form FuncionarioUI2 */
     public FuncionarioUI() {
         initComponents();
         setTipo();
@@ -32,6 +32,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
         carregarTabela();
     }
 
+    // Ativar/Desativar botoes
     private void setControls(boolean isModoEdicao) {
         btnNovo.setEnabled(!isModoEdicao);
         btnAtualizar.setEnabled(!isModoEdicao);
@@ -61,6 +62,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
         validate();
     }
 
+    // carregar conteudo do combobox
     private void setTipo(){
         String[][] tipos = new TipoControl().pesquisar("");
         for(String[] tipo:tipos){

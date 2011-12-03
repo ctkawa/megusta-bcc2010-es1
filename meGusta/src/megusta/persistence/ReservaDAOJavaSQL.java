@@ -25,11 +25,13 @@ public class ReservaDAOJavaSQL extends ReservaDAO{
 
     @Override
     public boolean salvar(Reserva reserva) {
-        String sql = "INSERT INTO reserva (id, data, id_cli, id_mesa) VALUES("
+        String sql = "INSERT INTO reserva (id, data, id_cli, id_mesa, penalizado, penalizado_ate) VALUES("
                 +reserva.getId()+"', '"
                 +reserva.getDataHora()+"', '"
                 +reserva.getId_cli()+"', '"
-                +reserva.getId_mesa()+"');";
+                +reserva.getId_mesa()+"', '";
+        sql += (reserva.isPenalizado()?"true":"false")+"', '";
+        sql += (reserva.getPenalizado_ate()==null?"null":reserva.getPenalizado_ate())+"');";
         return getConexao().executeCommand(sql);
     }
 
@@ -39,7 +41,9 @@ public class ReservaDAOJavaSQL extends ReservaDAO{
                 +reserva.getId()+"', '"
                 +reserva.getDataHora()+"', '"
                 +reserva.getId_cli()+"', '"
-                +reserva.getId_mesa()+"');";
+                +reserva.getId_mesa()+"', '";
+        sql += (reserva.isPenalizado()?"true":"false")+"', '";
+        sql += (reserva.getPenalizado_ate()==null?"null":reserva.getPenalizado_ate())+"');";
         return getConexao().executeCommand(sql);
     }
 
@@ -68,12 +72,14 @@ public class ReservaDAOJavaSQL extends ReservaDAO{
         try {
             if(resultSet != null){
                 while(resultSet.next()){
-                    String[] reserva = new String[4];
+                    String[] reserva = new String[6];
 
                     reserva[0] = resultSet.getString("id");
                     reserva[1] = resultSet.getString("data");
                     reserva[2] = resultSet.getString("id_cli");
                     reserva[3] = resultSet.getString("id_mesa");
+                    reserva[4] = resultSet.getString("penalizado");
+                    reserva[5] = resultSet.getString("penalizado_ate");
 
                     reservas.add(reserva);
                     numLinhas++;
@@ -88,7 +94,7 @@ public class ReservaDAOJavaSQL extends ReservaDAO{
             }
         }
 
-        return reservas.toArray(new String[numLinhas][4]);
+        return reservas.toArray(new String[numLinhas][6]);
     }
 
 
