@@ -15,17 +15,18 @@ import javax.swing.table.DefaultTableModel;
 import megusta.controller.FuncionarioControl;
 import megusta.controller.TipoControl;
 import megusta.model.Funcionario;
+import megusta.model.Reserva;
 
 /**
  *
  * @author cleber
  */
-public class FuncionarioUI extends javax.swing.JPanel {
+public class ReservaUI extends javax.swing.JPanel {
 
     private static final boolean MODO_EDICAO = true;
 
     /** CONSTRUTOR  Creates new form FuncionarioUI2 */
-    public FuncionarioUI() {
+    public ReservaUI() {
         initComponents();
         setTipo();
         setControls(!MODO_EDICAO);
@@ -86,10 +87,9 @@ public class FuncionarioUI extends javax.swing.JPanel {
         tableFuncionario = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtfTelefone = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        txtfCPF = new javax.swing.JTextField();
-        txtfNome = new javax.swing.JTextField();
+        txtfCPFCliente = new javax.swing.JTextField();
+        txtfId = new javax.swing.JTextField();
         txtfLogging = new javax.swing.JTextField();
         btnAtualizar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
@@ -100,10 +100,13 @@ public class FuncionarioUI extends javax.swing.JPanel {
         jSeparator2 = new javax.swing.JSeparator();
         cbbTipo = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
+        txtfData = new javax.swing.JFormattedTextField();
+        txtfHorario = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
 
-        jLabel4.setText("Telefone:");
+        jLabel4.setText("Horário:");
 
         tableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,21 +126,21 @@ public class FuncionarioUI extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tableFuncionario);
 
-        jLabel3.setText("CPF:");
+        jLabel3.setText("CPF cliente:");
 
-        jLabel2.setText("Nome:");
-
-        txtfTelefone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfTelefoneActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("Id:");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        txtfCPF.addActionListener(new java.awt.event.ActionListener() {
+        txtfCPFCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfCPFActionPerformed(evt);
+                txtfCPFClienteActionPerformed(evt);
+            }
+        });
+
+        txtfId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfIdActionPerformed(evt);
             }
         });
 
@@ -197,6 +200,24 @@ public class FuncionarioUI extends javax.swing.JPanel {
 
         jLabel6.setText("Tipo:");
 
+        txtfData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        txtfData.setText("  /  /    ");
+        txtfData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfDataActionPerformed(evt);
+            }
+        });
+
+        txtfHorario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        txtfHorario.setText("  :  ");
+        txtfHorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfHorarioActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Data:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,7 +225,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtfLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+                    .addComponent(txtfLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,14 +239,16 @@ public class FuncionarioUI extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtfId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+                            .addComponent(txtfCPFCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
                             .addComponent(cbbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtfTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
-                            .addComponent(txtfNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
-                            .addComponent(txtfCPF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))))
+                            .addComponent(txtfData, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -236,7 +259,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(123, 123, 123)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(518, Short.MAX_VALUE)))
+                    .addContainerGap(522, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,27 +268,31 @@ public class FuncionarioUI extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovo)
                     .addComponent(jLabel2)
-                    .addComponent(txtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtualizar)
                     .addComponent(jLabel3)
-                    .addComponent(txtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtfCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnExcluir)
-                    .addComponent(jLabel4)
-                    .addComponent(txtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
-                    .addComponent(jLabel6)
-                    .addComponent(cbbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtfHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancelar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
+                    .addComponent(cbbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPesquisar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtfLogging, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,7 +301,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(552, Short.MAX_VALUE)))
+                    .addContainerGap(556, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -283,13 +310,9 @@ public class FuncionarioUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtfTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfTelefoneActionPerformed
+    private void txtfCPFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCPFClienteActionPerformed
         // TODO add your handling code here:
-}//GEN-LAST:event_txtfTelefoneActionPerformed
-
-    private void txtfCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCPFActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_txtfCPFActionPerformed
+}//GEN-LAST:event_txtfCPFClienteActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         // TODO add your handling code here:
@@ -297,47 +320,47 @@ public class FuncionarioUI extends javax.swing.JPanel {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         setControls(MODO_EDICAO);
-        txtfNome.setText("");
-        txtfCPF.setText("");
-        txtfTelefone.setText("");
+        txtfId.setText("");
+        txtfCPFCliente.setText("");
+        txtfHorario.setText("");
         txtfLogging.setText("...");
 }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        int cpf = Integer.parseInt(txtfCPF.getText());
-        Funcionario funcionario = (Funcionario) new FuncionarioControl().pesquisar(cpf);
-        if(funcionario == null){
-            txtfLogging.setText("Nenhum funcionario foi encontrado com a condicao.");
+        int cpf = Integer.parseInt(txtfCPFCliente.getText());
+        Reserva reserva = (Reserva) new ReservaControl().pesquisar(cpf);
+        if(reserva == null){
+            txtfLogging.setText("Nenhuma reserva foi encontrada com a condicao.");
         }else{
-            txtfNome.setText(funcionario.getNome());
-            txtfCPF.setText(funcionario.getCpf());
-            txtfTelefone.setText(""+funcionario.getTelefone());
+            txtfId.setText(reserva.getNome());
+            txtfCPFCliente.setText(reserva.getCpf());
+            txtfHorario.setText(""+reserva.getTelefone());
             txtfLogging.setText("... retornado ...");
         }
 }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         setControls(!MODO_EDICAO);
-        txtfNome.setText("");
-        txtfCPF.setText("");
-        txtfTelefone.setText("");
+        txtfId.setText("");
+        txtfCPFCliente.setText("");
+        txtfHorario.setText("");
         txtfLogging.setText("...");
 }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Funcionario funcionario = new Funcionario(
-                txtfNome.getText(),
-                txtfCPF.getText(),
-                txtfTelefone.getText(),
+        Reserva reserva = new Reserva(
+                Integer.parseInt(txtfId.getText()),
+                txtfCPFCliente.getText(),
+                txtfHorario.getText(),
                 cbbTipo.getSelectedIndex()
         );
 
-        if (new FuncionarioControl().salvar(funcionario)){
-            txtfLogging.setText("O funcionario foi cadastrado com sucesso.");
+        if (new ReservaControl().salvar(reserva)){
+            txtfLogging.setText("A reserva foi cadastrada com sucesso.");
             setControls(!MODO_EDICAO);
             carregarTabela();
         }else{
-            txtfLogging.setText("O funcionario nao pode ser atualizado.");
+            txtfLogging.setText("A reserva nao pode ser atualizada.");
         }
 }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -352,13 +375,25 @@ public class FuncionarioUI extends javax.swing.JPanel {
     private void tableFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableFuncionarioMouseClicked
         if(btnNovo.isEnabled()){
             int linha = tableFuncionario.getSelectedRow();
-            txtfNome.setText((String) tableFuncionario.getValueAt(linha, 0));
-            txtfCPF.setText((String) tableFuncionario.getValueAt(linha, 1));
-            txtfTelefone.setText((String) tableFuncionario.getValueAt(linha, 2));
+            txtfId.setText((String) tableFuncionario.getValueAt(linha, 0));
+            txtfCPFCliente.setText((String) tableFuncionario.getValueAt(linha, 1));
+            txtfHorario.setText((String) tableFuncionario.getValueAt(linha, 2));
             //cbbTipo.setSelectedItem((String) tableFuncionario.getValueAt(linha, 4));
             cbbTipo.setSelectedIndex(Integer.parseInt((String) tableFuncionario.getValueAt(linha, 3)));
         }
     }//GEN-LAST:event_tableFuncionarioMouseClicked
+
+private void txtfIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfIdActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_txtfIdActionPerformed
+
+private void txtfDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfDataActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_txtfDataActionPerformed
+
+private void txtfHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfHorarioActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_txtfHorarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -369,6 +404,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox cbbTipo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -378,10 +414,11 @@ public class FuncionarioUI extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable tableFuncionario;
-    private javax.swing.JTextField txtfCPF;
+    private javax.swing.JTextField txtfCPFCliente;
+    private javax.swing.JFormattedTextField txtfData;
+    private javax.swing.JFormattedTextField txtfHorario;
+    private javax.swing.JTextField txtfId;
     private javax.swing.JTextField txtfLogging;
-    private javax.swing.JTextField txtfNome;
-    private javax.swing.JTextField txtfTelefone;
     // End of variables declaration//GEN-END:variables
 
 }
