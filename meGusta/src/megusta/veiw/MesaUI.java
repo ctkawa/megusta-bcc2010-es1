@@ -249,7 +249,7 @@ public class MesaUI extends javax.swing.JPanel {
         int id = Integer.parseInt(txtfID.getText());
         Mesa mesa = (Mesa) new MesaControl().pesquisar(id);
         if(mesa == null){
-            txtfLogging.setText("Nenhum cliente foi encontrado com condicao.");
+            txtfLogging.setText("Nenhuma mesa foi encontrada com a condicao.");
         }else{
             txtfID.setText(""+mesa.getId());
             txtfCapacidade.setText(""+mesa.getCapacidade());
@@ -271,11 +271,11 @@ public class MesaUI extends javax.swing.JPanel {
         );
 
         if (new MesaControl().salvar(mesa)){
-            txtfLogging.setText("A Mesa foi cadastrado com sucesso.");
+            txtfLogging.setText("A Mesa foi cadastrada com sucesso.");
             setControls(!MODO_EDICAO);
             carregarTabela();
         }else{
-            txtfLogging.setText("A mesa nao pode ser atualizado.");
+            txtfLogging.setText("A mesa nao pode ser atualizada.");
         }
 }//GEN-LAST:event_btnSalvarActionPerformed
 
