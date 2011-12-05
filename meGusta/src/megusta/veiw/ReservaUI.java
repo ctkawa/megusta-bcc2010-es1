@@ -11,10 +11,11 @@
 
 package megusta.veiw;
 
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import megusta.controller.FuncionarioControl;
+import megusta.controller.ReservaControl;
 import megusta.controller.TipoControl;
-import megusta.model.Funcionario;
 import megusta.model.Reserva;
 
 /**
@@ -29,7 +30,7 @@ public class ReservaUI extends javax.swing.JPanel {
     public ReservaUI() {
         initComponents();
         setTipo();
-        setControls(!MODO_EDICAO);
+        setControls(MODO_EDICAO);
         carregarTabela();
     }
 
@@ -67,7 +68,7 @@ public class ReservaUI extends javax.swing.JPanel {
     private void setTipo(){
         String[][] tipos = new TipoControl().pesquisar("");
         for(String[] tipo:tipos){
-            cbbTipo.insertItemAt(tipo[1], Integer.parseInt(tipo[0]));
+            cbbMesa.insertItemAt(tipo[1], Integer.parseInt(tipo[0]));
         }
         
     }
@@ -98,11 +99,16 @@ public class ReservaUI extends javax.swing.JPanel {
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        cbbTipo = new javax.swing.JComboBox();
+        cbbMesa = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         txtfData = new javax.swing.JFormattedTextField();
         txtfHorario = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
+        jSpinnerHorario = new javax.swing.JSpinner();
+        jSpinnerMinuto = new javax.swing.JSpinner();
+        jSpinnerDia = new javax.swing.JSpinner();
+        jSpinnerMes = new javax.swing.JSpinner();
+        jSpinnerAno = new javax.swing.JSpinner();
 
         jLabel5.setText("jLabel5");
 
@@ -191,17 +197,16 @@ public class ReservaUI extends javax.swing.JPanel {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        cbbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "escolha..." }));
-        cbbTipo.addActionListener(new java.awt.event.ActionListener() {
+        cbbMesa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "escolha..." }));
+        cbbMesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbTipoActionPerformed(evt);
+                cbbMesaActionPerformed(evt);
             }
         });
 
-        jLabel6.setText("Tipo:");
+        jLabel6.setText("Mesa:");
 
         txtfData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        txtfData.setText("  /  /    ");
         txtfData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtfDataActionPerformed(evt);
@@ -209,7 +214,6 @@ public class ReservaUI extends javax.swing.JPanel {
         });
 
         txtfHorario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-        txtfHorario.setText("  :  ");
         txtfHorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtfHorarioActionPerformed(evt);
@@ -225,30 +229,47 @@ public class ReservaUI extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtfLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
+                    .addComponent(txtfLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel6)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtfId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
-                            .addComponent(txtfCPFCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
-                            .addComponent(cbbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtfData, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtfHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cbbMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                            .addComponent(txtfCPFCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtfData, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jSpinnerDia, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jSpinnerMes, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jSpinnerAno, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSpinnerHorario)
+                                    .addComponent(txtfHorario, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSpinnerMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(119, 119, 119))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 532, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -278,18 +299,23 @@ public class ReservaUI extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnExcluir)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1)
+                        .addComponent(jSpinnerDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinnerMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinnerAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinnerHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinnerMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
-                    .addComponent(txtfHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel6)
+                    .addComponent(cbbMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
-                    .addComponent(cbbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(txtfHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPesquisar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
@@ -332,9 +358,12 @@ public class ReservaUI extends javax.swing.JPanel {
         if(reserva == null){
             txtfLogging.setText("Nenhuma reserva foi encontrada com a condicao.");
         }else{
-            txtfId.setText(reserva.getNome());
-            txtfCPFCliente.setText(reserva.getCpf());
-            txtfHorario.setText(""+reserva.getTelefone());
+            txtfId.setText("" + reserva.getId());
+            txtfCPFCliente.setText("" + reserva.getCpf_cli());
+            txtfData.setValue(reserva.getDataHora());
+            Date data = reserva.getDataHora();
+            txtfHorario.setText(""+reserva.getDataHora());
+            
             txtfLogging.setText("... retornado ...");
         }
 }//GEN-LAST:event_btnPesquisarActionPerformed
@@ -349,10 +378,13 @@ public class ReservaUI extends javax.swing.JPanel {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         Reserva reserva = new Reserva(
+                // (int id, Date dataHora, String cpf_cli, int id_mesa, boolean penalizado, Date penalizado_ate)
                 Integer.parseInt(txtfId.getText()),
+                new Date(),
                 txtfCPFCliente.getText(),
-                txtfHorario.getText(),
-                cbbTipo.getSelectedIndex()
+                cbbMesa.getSelectedIndex(),
+                false,
+                new Date() // penalizado ate
         );
 
         if (new ReservaControl().salvar(reserva)){
@@ -368,9 +400,9 @@ public class ReservaUI extends javax.swing.JPanel {
         //if ( new ClienteControl().excluir(cliente));
 }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void cbbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTipoActionPerformed
+    private void cbbMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMesaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbbTipoActionPerformed
+    }//GEN-LAST:event_cbbMesaActionPerformed
 
     private void tableFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableFuncionarioMouseClicked
         if(btnNovo.isEnabled()){
@@ -379,7 +411,7 @@ public class ReservaUI extends javax.swing.JPanel {
             txtfCPFCliente.setText((String) tableFuncionario.getValueAt(linha, 1));
             txtfHorario.setText((String) tableFuncionario.getValueAt(linha, 2));
             //cbbTipo.setSelectedItem((String) tableFuncionario.getValueAt(linha, 4));
-            cbbTipo.setSelectedIndex(Integer.parseInt((String) tableFuncionario.getValueAt(linha, 3)));
+            cbbMesa.setSelectedIndex(Integer.parseInt((String) tableFuncionario.getValueAt(linha, 3)));
         }
     }//GEN-LAST:event_tableFuncionarioMouseClicked
 
@@ -387,13 +419,13 @@ private void txtfIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 // TODO add your handling code here:
 }//GEN-LAST:event_txtfIdActionPerformed
 
-private void txtfDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfDataActionPerformed
-// TODO add your handling code here:
-}//GEN-LAST:event_txtfDataActionPerformed
-
 private void txtfHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfHorarioActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_txtfHorarioActionPerformed
+
+private void txtfDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfDataActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_txtfDataActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -403,7 +435,7 @@ private void txtfHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox cbbTipo;
+    private javax.swing.JComboBox cbbMesa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -413,6 +445,11 @@ private void txtfHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSpinner jSpinnerAno;
+    private javax.swing.JSpinner jSpinnerDia;
+    private javax.swing.JSpinner jSpinnerHorario;
+    private javax.swing.JSpinner jSpinnerMes;
+    private javax.swing.JSpinner jSpinnerMinuto;
     private javax.swing.JTable tableFuncionario;
     private javax.swing.JTextField txtfCPFCliente;
     private javax.swing.JFormattedTextField txtfData;

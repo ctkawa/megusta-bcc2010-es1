@@ -25,10 +25,10 @@ public class ReservaDAOJavaSQL extends ReservaDAO{
 
     @Override
     public boolean salvar(Reserva reserva) {
-        String sql = "INSERT INTO reserva (id, data, id_cli, id_mesa, penalizado, penalizado_ate) VALUES("
+        String sql = "INSERT INTO reserva (id, data, cpf_cli, id_mesa, penalizado, penalizado_ate) VALUES("
                 +reserva.getId()+"', '"
                 +reserva.getDataHora()+"', '"
-                +reserva.getId_cli()+"', '"
+                +reserva.getCpf_cli()+"', '"
                 +reserva.getId_mesa()+"', '";
         sql += (reserva.isPenalizado()?"true":"false")+"', '";
         sql += (reserva.getPenalizado_ate()==null?"null":reserva.getPenalizado_ate())+"');";
@@ -37,10 +37,10 @@ public class ReservaDAOJavaSQL extends ReservaDAO{
 
     @Override
     public boolean atualizar(Reserva reserva) {
-        String sql = "UPDATE reserva (id, data, id_cli, id_mesa) VALUES("
+        String sql = "UPDATE reserva (id, data, cpf_cli, id_mesa) VALUES("
                 +reserva.getId()+"', '"
                 +reserva.getDataHora()+"', '"
-                +reserva.getId_cli()+"', '"
+                +reserva.getCpf_cli()+"', '"
                 +reserva.getId_mesa()+"', '";
         sql += (reserva.isPenalizado()?"true":"false")+"', '";
         sql += (reserva.getPenalizado_ate()==null?"null":reserva.getPenalizado_ate())+"');";
@@ -76,7 +76,7 @@ public class ReservaDAOJavaSQL extends ReservaDAO{
 
                     reserva[0] = resultSet.getString("id");
                     reserva[1] = resultSet.getString("data");
-                    reserva[2] = resultSet.getString("id_cli");
+                    reserva[2] = resultSet.getString("cpf_cli");
                     reserva[3] = resultSet.getString("id_mesa");
                     reserva[4] = resultSet.getString("penalizado");
                     reserva[5] = resultSet.getString("penalizado_ate");

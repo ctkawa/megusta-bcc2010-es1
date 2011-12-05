@@ -34,13 +34,13 @@ public class ApplicationFrame extends javax.swing.JFrame {
         jBarraMenu = new javax.swing.JMenuBar();
         jMenuItemArquivo = new javax.swing.JMenu();
         jMenuItemFuncionario = new javax.swing.JMenuItem();
+        jMenuItemMesa = new javax.swing.JMenuItem();
+        jMenuItemReserva = new javax.swing.JMenuItem();
         jMenuItemSair = new javax.swing.JMenuItem();
-        jMenuItemEditar = new javax.swing.JMenu();
-        jMenuEditar = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenuItemArquivo.setText("Arquivo");
+        jMenuItemArquivo.setText("Menu");
 
         jMenuItemFuncionario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemFuncionario.setText("Funcionario");
@@ -50,6 +50,24 @@ public class ApplicationFrame extends javax.swing.JFrame {
             }
         });
         jMenuItemArquivo.add(jMenuItemFuncionario);
+
+        jMenuItemMesa.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemMesa.setText("Mesa");
+        jMenuItemMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMesaActionPerformed(evt);
+            }
+        });
+        jMenuItemArquivo.add(jMenuItemMesa);
+
+        jMenuItemReserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemReserva.setText("Reserva");
+        jMenuItemReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemReservaActionPerformed(evt);
+            }
+        });
+        jMenuItemArquivo.add(jMenuItemReserva);
 
         jMenuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemSair.setText("Sair");
@@ -61,13 +79,6 @@ public class ApplicationFrame extends javax.swing.JFrame {
         jMenuItemArquivo.add(jMenuItemSair);
 
         jBarraMenu.add(jMenuItemArquivo);
-
-        jMenuItemEditar.setText("Editar");
-
-        jMenuEditar.setText("jMenu2");
-        jMenuItemEditar.add(jMenuEditar);
-
-        jBarraMenu.add(jMenuItemEditar);
 
         setJMenuBar(jBarraMenu);
 
@@ -96,6 +107,21 @@ public class ApplicationFrame extends javax.swing.JFrame {
         validate();
     }//GEN-LAST:event_jMenuItemFuncionarioActionPerformed
 
+private void jMenuItemMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMesaActionPerformed
+        MesaUI pnlMesa = new MesaUI();
+        setContentPane(pnlMesa);
+        setSize(800, 600);
+        validate();
+
+}//GEN-LAST:event_jMenuItemMesaActionPerformed
+
+private void jMenuItemReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReservaActionPerformed
+        ReservaUI pnlReserva = new ReservaUI();
+        setContentPane(pnlReserva);
+        setSize(800, 600);
+        validate();
+}//GEN-LAST:event_jMenuItemReservaActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -109,10 +135,10 @@ public class ApplicationFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jBarraMenu;
-    private javax.swing.JMenu jMenuEditar;
     private javax.swing.JMenu jMenuItemArquivo;
-    private javax.swing.JMenu jMenuItemEditar;
     private javax.swing.JMenuItem jMenuItemFuncionario;
+    private javax.swing.JMenuItem jMenuItemMesa;
+    private javax.swing.JMenuItem jMenuItemReserva;
     private javax.swing.JMenuItem jMenuItemSair;
     // End of variables declaration//GEN-END:variables
 
