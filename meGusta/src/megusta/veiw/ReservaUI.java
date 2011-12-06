@@ -11,6 +11,7 @@
 
 package megusta.veiw;
 
+
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import megusta.controller.FuncionarioControl;
@@ -42,18 +43,13 @@ public class ReservaUI extends javax.swing.JPanel {
         btnSalvar.setEnabled(isModoEdicao);
         btnCancelar.setEnabled(isModoEdicao);
         btnPesquisar.setEnabled(!isModoEdicao);
-        tableFuncionario.setEnabled(!isModoEdicao);
-        /*txtfID.setEditable(isModoEdicao);
-        txtfRG.setEditable(isModoEdicao);
-        txtfNome.setEditable(isModoEdicao);
-        txtfTelefone.setEditable(isModoEdicao);
-        cbbTipo.setEditable(isModoEdicao);*/
+        tableDados.setEnabled(!isModoEdicao);
     }
 
     private void carregarTabela() {
         String[][] funcionarios = new FuncionarioControl().pesquisar("");
         String[] colunas = {"Nome", "CPF", "Telefone", "Tipo"};
-        tableFuncionario.setModel(
+        tableDados.setModel(
             new DefaultTableModel(funcionarios, colunas) {
                 @Override
                 public boolean isCellEditable(int rowIndex, int mColIndex){
@@ -85,11 +81,11 @@ public class ReservaUI extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableFuncionario = new javax.swing.JTable();
+        tableDados = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        txtfCPFCliente = new javax.swing.JTextField();
+        txtfIdCliente = new javax.swing.JTextField();
         txtfId = new javax.swing.JTextField();
         txtfLogging = new javax.swing.JTextField();
         btnAtualizar = new javax.swing.JButton();
@@ -101,20 +97,18 @@ public class ReservaUI extends javax.swing.JPanel {
         jSeparator2 = new javax.swing.JSeparator();
         cbbMesa = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
-        txtfData = new javax.swing.JFormattedTextField();
-        txtfHorario = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
-        jSpinnerHorario = new javax.swing.JSpinner();
         jSpinnerMinuto = new javax.swing.JSpinner();
         jSpinnerDia = new javax.swing.JSpinner();
         jSpinnerMes = new javax.swing.JSpinner();
         jSpinnerAno = new javax.swing.JSpinner();
+        jSpinnerHora = new javax.swing.JSpinner();
 
         jLabel5.setText("jLabel5");
 
         jLabel4.setText("Horário:");
 
-        tableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
+        tableDados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -125,22 +119,22 @@ public class ReservaUI extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tableFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableDados.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableFuncionarioMouseClicked(evt);
+                tableDadosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tableFuncionario);
+        jScrollPane1.setViewportView(tableDados);
 
-        jLabel3.setText("CPF cliente:");
+        jLabel3.setText("ID cliente:");
 
         jLabel2.setText("Id:");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        txtfCPFCliente.addActionListener(new java.awt.event.ActionListener() {
+        txtfIdCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfCPFClienteActionPerformed(evt);
+                txtfIdClienteActionPerformed(evt);
             }
         });
 
@@ -206,21 +200,17 @@ public class ReservaUI extends javax.swing.JPanel {
 
         jLabel6.setText("Mesa:");
 
-        txtfData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        txtfData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfDataActionPerformed(evt);
-            }
-        });
-
-        txtfHorario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-        txtfHorario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfHorarioActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Data:");
+
+        jSpinnerMinuto.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 5));
+
+        jSpinnerDia.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+
+        jSpinnerMes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+
+        jSpinnerAno.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(2011), Integer.valueOf(2011), null, Integer.valueOf(1)));
+
+        jSpinnerHora.setModel(new javax.swing.SpinnerNumberModel(12, 0, 23, 1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -229,58 +219,55 @@ public class ReservaUI extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtfLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel6)))
+                            .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbbMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtfId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                            .addComponent(txtfCPFCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtfData, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jSpinnerDia, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jSpinnerMes, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jSpinnerAno, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jSpinnerHorario)
-                                    .addComponent(txtfHorario, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))))
-                        .addGap(18, 18, 18)
-                        .addComponent(jSpinnerMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(119, 119, 119))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 532, Short.MAX_VALUE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jSpinnerDia, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jSpinnerMes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jSpinnerAno, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel4)
+                                    .addGap(12, 12, 12)
+                                    .addComponent(jSpinnerHora, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jSpinnerMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtfId)
+                                .addComponent(txtfIdCliente)))
+                        .addGap(178, 178, 178))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtfLogging, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(129, 129, 129)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(512, Short.MAX_VALUE)))
+                    .addContainerGap(668, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(123, 123, 123)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(522, Short.MAX_VALUE)))
+                    .addContainerGap(674, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,7 +281,7 @@ public class ReservaUI extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtualizar)
                     .addComponent(jLabel3)
-                    .addComponent(txtfCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtfIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnExcluir)
@@ -303,22 +290,19 @@ public class ReservaUI extends javax.swing.JPanel {
                         .addComponent(jSpinnerDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jSpinnerMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jSpinnerAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSpinnerHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSpinnerMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)))
+                        .addComponent(jLabel4)
+                        .addComponent(jSpinnerHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinnerMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(jLabel6)
                     .addComponent(cbbMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar)
-                    .addComponent(txtfHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPesquisar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtfLogging, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,18 +311,18 @@ public class ReservaUI extends javax.swing.JPanel {
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(556, Short.MAX_VALUE)))
+                    .addContainerGap(560, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(344, Short.MAX_VALUE)))
+                    .addContainerGap(352, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtfCPFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCPFClienteActionPerformed
+    private void txtfIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfIdClienteActionPerformed
         // TODO add your handling code here:
-}//GEN-LAST:event_txtfCPFClienteActionPerformed
+}//GEN-LAST:event_txtfIdClienteActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         // TODO add your handling code here:
@@ -347,22 +331,34 @@ public class ReservaUI extends javax.swing.JPanel {
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         setControls(MODO_EDICAO);
         txtfId.setText("");
-        txtfCPFCliente.setText("");
-        txtfHorario.setText("");
+        txtfIdCliente.setText("");
+        
+        /* Rascunho, obter valor de agora */
+        jSpinnerAno.setValue(2011);
+        jSpinnerMes.setValue(12);
+        jSpinnerDia.setValue(8);
+        jSpinnerHora.setValue(12);
+        jSpinnerMinuto.setValue(0);
+        
         txtfLogging.setText("...");
 }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        int cpf = Integer.parseInt(txtfCPFCliente.getText());
+        int cpf = Integer.parseInt(txtfIdCliente.getText());
         Reserva reserva = (Reserva) new ReservaControl().pesquisar(cpf);
         if(reserva == null){
             txtfLogging.setText("Nenhuma reserva foi encontrada com a condicao.");
         }else{
             txtfId.setText("" + reserva.getId());
-            txtfCPFCliente.setText("" + reserva.getCpf_cli());
-            txtfData.setValue(reserva.getDataHora());
-            Date data = reserva.getDataHora();
-            txtfHorario.setText(""+reserva.getDataHora());
+            txtfIdCliente.setText("" + reserva.getId_cli());
+
+            jSpinnerAno.setValue(reserva.getDataHora().getYear());
+            jSpinnerMes.setValue(reserva.getDataHora().getMonth());
+            jSpinnerDia.setValue(reserva.getDataHora().getDate());
+            jSpinnerHora.setValue(reserva.getDataHora().getHours());
+            jSpinnerMinuto.setValue(reserva.getDataHora().getMinutes());
+
+            cbbMesa.setSelectedIndex(reserva.getId_mesa());
             
             txtfLogging.setText("... retornado ...");
         }
@@ -371,8 +367,16 @@ public class ReservaUI extends javax.swing.JPanel {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         setControls(!MODO_EDICAO);
         txtfId.setText("");
-        txtfCPFCliente.setText("");
-        txtfHorario.setText("");
+        txtfIdCliente.setText("");
+
+        jSpinnerAno.setValue(2011);
+        jSpinnerMes.setValue(12);
+        jSpinnerDia.setValue(8);
+        jSpinnerHora.setValue(12);
+        jSpinnerMinuto.setValue(0);
+
+        cbbMesa.setSelectedIndex(0);
+
         txtfLogging.setText("...");
 }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -381,7 +385,7 @@ public class ReservaUI extends javax.swing.JPanel {
                 // (int id, Date dataHora, String cpf_cli, int id_mesa, boolean penalizado, Date penalizado_ate)
                 Integer.parseInt(txtfId.getText()),
                 new Date(),
-                txtfCPFCliente.getText(),
+                Integer.parseInt(txtfIdCliente.getText()),
                 cbbMesa.getSelectedIndex(),
                 false,
                 new Date() // penalizado ate
@@ -404,28 +408,25 @@ public class ReservaUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbbMesaActionPerformed
 
-    private void tableFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableFuncionarioMouseClicked
+    private void tableDadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDadosMouseClicked
         if(btnNovo.isEnabled()){
-            int linha = tableFuncionario.getSelectedRow();
-            txtfId.setText((String) tableFuncionario.getValueAt(linha, 0));
-            txtfCPFCliente.setText((String) tableFuncionario.getValueAt(linha, 1));
-            txtfHorario.setText((String) tableFuncionario.getValueAt(linha, 2));
-            //cbbTipo.setSelectedItem((String) tableFuncionario.getValueAt(linha, 4));
-            cbbMesa.setSelectedIndex(Integer.parseInt((String) tableFuncionario.getValueAt(linha, 3)));
+            int linha = tableDados.getSelectedRow();
+            txtfId.setText((String) tableDados.getValueAt(linha, 0));
+            txtfIdCliente.setText((String) tableDados.getValueAt(linha, 1));
+
+            jSpinnerAno.setValue(1);
+            jSpinnerMes.setValue(2);
+            jSpinnerDia.setValue(3);
+            jSpinnerHora.setValue(4);
+            jSpinnerMinuto.setValue(5);
+
+            cbbMesa.setSelectedIndex(Integer.parseInt((String) tableDados.getValueAt(linha, 3)));
         }
-    }//GEN-LAST:event_tableFuncionarioMouseClicked
+    }//GEN-LAST:event_tableDadosMouseClicked
 
 private void txtfIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfIdActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_txtfIdActionPerformed
-
-private void txtfHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfHorarioActionPerformed
-// TODO add your handling code here:
-}//GEN-LAST:event_txtfHorarioActionPerformed
-
-private void txtfDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfDataActionPerformed
-// TODO add your handling code here:
-}//GEN-LAST:event_txtfDataActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -447,14 +448,12 @@ private void txtfDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSpinner jSpinnerAno;
     private javax.swing.JSpinner jSpinnerDia;
-    private javax.swing.JSpinner jSpinnerHorario;
+    private javax.swing.JSpinner jSpinnerHora;
     private javax.swing.JSpinner jSpinnerMes;
     private javax.swing.JSpinner jSpinnerMinuto;
-    private javax.swing.JTable tableFuncionario;
-    private javax.swing.JTextField txtfCPFCliente;
-    private javax.swing.JFormattedTextField txtfData;
-    private javax.swing.JFormattedTextField txtfHorario;
+    private javax.swing.JTable tableDados;
     private javax.swing.JTextField txtfId;
+    private javax.swing.JTextField txtfIdCliente;
     private javax.swing.JTextField txtfLogging;
     // End of variables declaration//GEN-END:variables
 

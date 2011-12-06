@@ -18,6 +18,10 @@ import java.util.List;
  */
 public class ReservaDAOJavaSQL extends ReservaDAO{
 
+    public ReservaDAOJavaSQL() {
+        conexao = new ConexaoJavaSQL();
+    }
+
     @Override
     public ConexaoJavaSQL getConexao() {
         return (ConexaoJavaSQL) conexao;
@@ -25,22 +29,23 @@ public class ReservaDAOJavaSQL extends ReservaDAO{
 
     @Override
     public boolean salvar(Reserva reserva) {
-        String sql = "INSERT INTO reserva (id, data, cpf_cli, id_mesa, penalizado, penalizado_ate) VALUES("
-                +reserva.getId()+"', '"
-                +reserva.getDataHora()+"', '"
-                +reserva.getCpf_cli()+"', '"
-                +reserva.getId_mesa()+"', '";
-        sql += (reserva.isPenalizado()?"true":"false")+"', '";
-        sql += (reserva.getPenalizado_ate()==null?"null":reserva.getPenalizado_ate())+"');";
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sql = "INSERT INTO reserva (id, data, id_cli, id_mesa, penalizado, penalizado_ate) VALUES('"
+                /*+reserva.getId()*/+"', '"
+                +sdf.format(reserva.getDataHora())+"', '"
+                +reserva.getId_cli()+"', '"
+                +reserva.getId_mesa()+"', ";
+        sql += (reserva.isPenalizado()?"true":"false")+", '";
+        sql += (reserva.getPenalizado_ate()==null?"null":sdf.format(reserva.getPenalizado_ate()))+"');";
         return getConexao().executeCommand(sql);
     }
 
     @Override
     public boolean atualizar(Reserva reserva) {
-        String sql = "UPDATE reserva (id, data, cpf_cli, id_mesa) VALUES("
+        String sql = "UPDATE reserva (id, data, id_cli, id_mesa) VALUES("
                 +reserva.getId()+"', '"
                 +reserva.getDataHora()+"', '"
-                +reserva.getCpf_cli()+"', '"
+                +reserva.getId_cli()+"', '"
                 +reserva.getId_mesa()+"', '";
         sql += (reserva.isPenalizado()?"true":"false")+"', '";
         sql += (reserva.getPenalizado_ate()==null?"null":reserva.getPenalizado_ate())+"');";
@@ -49,7 +54,7 @@ public class ReservaDAOJavaSQL extends ReservaDAO{
 
     @Override
     public boolean excluir(Reserva reserva) {
-        String sql = "DELETE reserva WHERE (id="
+        String sql = "DELETE FROM reserva WHERE (id="
                 +reserva.getId()+");";
         return getConexao().executeCommand(sql);
     }
@@ -76,7 +81,7 @@ public class ReservaDAOJavaSQL extends ReservaDAO{
 
                     reserva[0] = resultSet.getString("id");
                     reserva[1] = resultSet.getString("data");
-                    reserva[2] = resultSet.getString("cpf_cli");
+                    reserva[2] = resultSet.getString("id_cli");
                     reserva[3] = resultSet.getString("id_mesa");
                     reserva[4] = resultSet.getString("penalizado");
                     reserva[5] = resultSet.getString("penalizado_ate");

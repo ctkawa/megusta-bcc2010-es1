@@ -28,7 +28,7 @@ public class FuncionarioDAOJavaSQL extends FuncionarioDAO{
     
     @Override
     public boolean salvar(Funcionario funcionario) {
-        String sql = "INSERT INTO funcionario (nome, cpf, telefone, tipo) VALUES("
+        String sql = "INSERT INTO funcionario (nome, cpf, telefone, tipo) VALUES('"
                 +funcionario.getNome()+"', '"
                 +funcionario.getCpf()+"', '"
                 +funcionario.getTelefone()+"', '"
@@ -48,7 +48,7 @@ public class FuncionarioDAOJavaSQL extends FuncionarioDAO{
 
     @Override
     public boolean excluir(Funcionario funcionario) {
-        String sql = "DELETE funcionario WHERE (cpf="
+        String sql = "DELETE FROM funcionario WHERE (cpf="
                 +funcionario.getCpf()+");";
         return getConexao().executeCommand(sql);
     }

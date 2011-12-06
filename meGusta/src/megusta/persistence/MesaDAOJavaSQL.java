@@ -17,6 +17,10 @@ import java.util.List;
  */
 public class MesaDAOJavaSQL extends MesaDAO{
 
+    public MesaDAOJavaSQL() {
+        conexao = new ConexaoJavaSQL();
+    }
+
     @Override
     public ConexaoJavaSQL getConexao() {
         return (ConexaoJavaSQL) conexao;
@@ -24,8 +28,8 @@ public class MesaDAOJavaSQL extends MesaDAO{
 
     @Override
     public boolean salvar(Mesa mesa) {
-        String sql = "INSERT INTO mesa (id, capacidade) VALUES("
-                +mesa.getId()+"', '"
+        String sql = "INSERT INTO mesa (capacidade) VALUES('"
+                
                 +mesa.getCapacidade()+"');";
         return getConexao().executeCommand(sql);
     }
@@ -40,7 +44,7 @@ public class MesaDAOJavaSQL extends MesaDAO{
 
     @Override
     public boolean excluir(Mesa mesa) {
-        String sql = "DELETE mesa WHERE (id="
+        String sql = "DELETE FROM mesa WHERE (id="
                 +mesa.getId()+");";
         return getConexao().executeCommand(sql);
     }

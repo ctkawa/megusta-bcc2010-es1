@@ -110,7 +110,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
 private void jMenuItemMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMesaActionPerformed
         MesaUI pnlMesa = new MesaUI();
         setContentPane(pnlMesa);
-        setSize(800, 600);
+        setSize(400, 550);
         validate();
 
 }//GEN-LAST:event_jMenuItemMesaActionPerformed
@@ -118,7 +118,7 @@ private void jMenuItemMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void jMenuItemReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReservaActionPerformed
         ReservaUI pnlReserva = new ReservaUI();
         setContentPane(pnlReserva);
-        setSize(800, 600);
+        setSize(650, 600);
         validate();
 }//GEN-LAST:event_jMenuItemReservaActionPerformed
 

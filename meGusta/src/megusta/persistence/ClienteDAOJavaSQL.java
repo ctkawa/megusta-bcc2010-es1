@@ -28,8 +28,7 @@ public class ClienteDAOJavaSQL extends ClienteDAO{
     
     @Override
     public boolean salvar(Cliente cliente) {
-        String sql = "INSERT INTO cliente (id, nome, telefone) VALUES("
-                +cliente.getId()+", '"
+        String sql = "INSERT INTO cliente (nome, telefone) VALUES('"
                 +cliente.getNome()+"', '"
                 +cliente.getTelefone()+"');";
         return getConexao().executeCommand(sql);
@@ -46,7 +45,7 @@ public class ClienteDAOJavaSQL extends ClienteDAO{
 
     @Override
     public boolean excluir(Cliente cliente) {
-        String sql = "DELETE cliente WHERE (id="
+        String sql = "DELETE FROM cliente WHERE (id="
                 +cliente.getId()+");";
         return getConexao().executeCommand(sql);
     }
