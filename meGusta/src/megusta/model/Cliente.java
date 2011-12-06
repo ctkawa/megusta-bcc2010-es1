@@ -10,23 +10,24 @@ package megusta.model;
  * @author cleber
  */
 public class Cliente extends Entity{
-    private int id;
+    private int cpf;
     private String nome;
     private String telefone;
 
-    public Cliente(int id, String nome, String telefone) {
-        this.id = id;
+    public Cliente(int cpf, String nome, String telefone) {
+        this.cpf = cpf;
         this.nome = nome;
         this.telefone = telefone;
     }
 
-    public int getId() {
-        return id;
+    public int getCpf() {
+        return cpf;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCpf(int cpf) {
+        this.cpf = cpf;
     }
+
 
     public String getNome() {
         return nome;

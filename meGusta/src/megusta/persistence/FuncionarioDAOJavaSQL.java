@@ -48,8 +48,8 @@ public class FuncionarioDAOJavaSQL extends FuncionarioDAO{
 
     @Override
     public boolean excluir(Funcionario funcionario) {
-        String sql = "DELETE FROM funcionario WHERE (cpf="
-                +funcionario.getCpf()+");";
+        String sql = "DELETE FROM funcionario WHERE (cpf='"
+                +funcionario.getCpf()+"');";
         return getConexao().executeCommand(sql);
     }
 

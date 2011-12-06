@@ -36,7 +36,8 @@ public class FuncionarioUI extends javax.swing.JPanel {
     private void setControls(boolean isModoEdicao) {
         btnNovo.setEnabled(!isModoEdicao);
         btnAtualizar.setEnabled(!isModoEdicao);
-        btnExcluir.setEnabled(!isModoEdicao);
+        //btnExcluir.setEnabled(!isModoEdicao);
+        btnExcluir.setEnabled(false);
         btnSalvar.setEnabled(isModoEdicao);
         btnCancelar.setEnabled(isModoEdicao);
         btnPesquisar.setEnabled(!isModoEdicao);
@@ -348,7 +349,25 @@ public class FuncionarioUI extends javax.swing.JPanel {
 }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        //if ( new ClienteControl().excluir(cliente));
+        Funcionario funcionario = new Funcionario(
+                txtfNome.getText(),
+                txtfCPF.getText(),
+                txtfTelefone.getText(),
+                cbbTipo.getSelectedIndex()
+        );
+
+        if (new FuncionarioControl().excluir(funcionario)){
+            txtfLogging.setText("o funcionario foi excluido com sucesso.");
+            setControls(!MODO_EDICAO);
+            carregarTabela();
+            btnExcluir.setEnabled(false);
+            txtfNome.setText("");
+            txtfCPF.setText("");
+            txtfTelefone.setText("");
+            cbbTipo.setSelectedIndex(0);
+        }else{
+            txtfLogging.setText("A mesa nao pode ser excluido.");
+        }
 }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void cbbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTipoActionPerformed
@@ -368,6 +387,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
                     cbbTipo.setSelectedIndex(Integer.parseInt(row[0]));
                 }
             }
+            btnExcluir.setEnabled(true);
         }
     }//GEN-LAST:event_tableFuncionarioMouseClicked
 
