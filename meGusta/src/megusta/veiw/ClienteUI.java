@@ -20,12 +20,12 @@ import megusta.model.Funcionario;
  *
  * @author cleber
  */
-public class FuncionarioUI extends javax.swing.JPanel {
+public class ClienteUI extends javax.swing.JPanel {
 
     private static final boolean MODO_EDICAO = true;
 
     /** CONSTRUTOR  Creates new form FuncionarioUI2 */
-    public FuncionarioUI() {
+    public ClienteUI() {
         initComponents();
         setTipo();
         setControls(!MODO_EDICAO);
@@ -50,12 +50,6 @@ public class FuncionarioUI extends javax.swing.JPanel {
 
     private void carregarTabela() {
         String[][] funcionarios = new FuncionarioControl().pesquisar("");
-        //trocar numero por nome do cargo correspondente
-        String[][] tipos = new TipoControl().pesquisar("");
-        for(String[] row : funcionarios){
-            row[3] = tipos[Integer.parseInt(row[3])-1][1];
-        }
-
         String[] colunas = {"Nome", "CPF", "Telefone", "Tipo"};
         tableFuncionario.setModel(
             new DefaultTableModel(funcionarios, colunas) {
@@ -313,7 +307,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
         int cpf = Integer.parseInt(txtfCPF.getText());
         Funcionario funcionario = (Funcionario) new FuncionarioControl().pesquisar(cpf);
         if(funcionario == null){
-            txtfLogging.setText("Nenhum funcionario foi encontrado com a condicao.");
+            txtfLogging.setText("Nenhum cliente foi encontrado com condicao.");
         }else{
             txtfNome.setText(funcionario.getNome());
             txtfCPF.setText(funcionario.getCpf());
@@ -339,11 +333,11 @@ public class FuncionarioUI extends javax.swing.JPanel {
         );
 
         if (new FuncionarioControl().salvar(funcionario)){
-            txtfLogging.setText("O funcionario foi cadastrado com sucesso.");
+            txtfLogging.setText("O cliente foi cadastrado com sucesso.");
             setControls(!MODO_EDICAO);
             carregarTabela();
         }else{
-            txtfLogging.setText("O funcionario nao pode ser atualizado.");
+            txtfLogging.setText("O cliente nao pode ser atualizado.");
         }
 }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -361,13 +355,8 @@ public class FuncionarioUI extends javax.swing.JPanel {
             txtfNome.setText((String) tableFuncionario.getValueAt(linha, 0));
             txtfCPF.setText((String) tableFuncionario.getValueAt(linha, 1));
             txtfTelefone.setText((String) tableFuncionario.getValueAt(linha, 2));
-            
-            String[][] tipos = new TipoControl().pesquisar("");
-            for(String[] row : tipos){//gambiarra total
-                if(row[1].equals(tableFuncionario.getValueAt(linha, 3))){
-                    cbbTipo.setSelectedIndex(Integer.parseInt(row[0]));
-                }
-            }
+            //cbbTipo.setSelectedItem((String) tableFuncionario.getValueAt(linha, 4));
+            cbbTipo.setSelectedIndex(Integer.parseInt((String) tableFuncionario.getValueAt(linha, 3)));
         }
     }//GEN-LAST:event_tableFuncionarioMouseClicked
 

@@ -26,12 +26,16 @@ public class MesaUI extends javax.swing.JPanel {
     /** Creates new form MesaUI */
     public MesaUI() {
         initComponents();
+        carregarTabela();
+        setControls(!MODO_EDICAO);
+        
     }
 
     private void setControls(boolean isModoEdicao) {
         btnNovo.setEnabled(!isModoEdicao);
         btnAtualizar.setEnabled(!isModoEdicao);
-        btnExcluir.setEnabled(!isModoEdicao);
+        //btnExcluir.setEnabled(!isModoEdicao);
+        btnExcluir.setEnabled(false);
         btnSalvar.setEnabled(isModoEdicao);
         btnCancelar.setEnabled(isModoEdicao);
         btnPesquisar.setEnabled(!isModoEdicao);
@@ -177,16 +181,13 @@ public class MesaUI extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
-                        .addGap(53, 53, 53)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtfID, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                            .addComponent(txtfCapacidade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
-                        .addGap(68, 68, 68))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
-                            .addComponent(txtfLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE))
-                        .addContainerGap())))
+                            .addComponent(txtfID, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                            .addComponent(txtfCapacidade, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
+                    .addComponent(txtfLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,18 +218,12 @@ public class MesaUI extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btnPesquisar))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(txtfLogging, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tableMesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMesaMouseClicked
-        int linha = tableMesa.getSelectedRow();
-        txtfID.setText((String) tableMesa.getValueAt(linha, 0));
-        txtfCapacidade.setText((String) tableMesa.getValueAt(linha, 1));
-}//GEN-LAST:event_tableMesaMouseClicked
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         // TODO add your handling code here:
@@ -266,7 +261,8 @@ public class MesaUI extends javax.swing.JPanel {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         Mesa mesa = new Mesa(
-            Integer.parseInt(txtfID.getText()),
+            //Integer.parseInt(txtfID.getText()),
+            0,
             Integer.parseInt(txtfCapacidade.getText())
         );
 
@@ -274,18 +270,45 @@ public class MesaUI extends javax.swing.JPanel {
             txtfLogging.setText("A Mesa foi cadastrada com sucesso.");
             setControls(!MODO_EDICAO);
             carregarTabela();
+            txtfID.setText("");
+            txtfCapacidade.setText("");
         }else{
             txtfLogging.setText("A mesa nao pode ser atualizada.");
         }
+        carregarTabela();
 }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        //if ( new ClienteControl().excluir(cliente));
+        Mesa mesa = new Mesa(
+                Integer.parseInt(txtfID.getText()),
+                Integer.parseInt(txtfCapacidade.getText())
+        );
+
+        if (new MesaControl().excluir(mesa)){
+            txtfLogging.setText("A mesa foi excluido com sucesso.");
+            setControls(!MODO_EDICAO);
+            carregarTabela();
+            btnExcluir.setEnabled(false);
+            txtfID.setText("");
+            txtfCapacidade.setText("");
+        }else{
+            txtfLogging.setText("A mesa nao pode ser excluido.");
+        }
+        
 }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void txtfCapacidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCapacidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtfCapacidadeActionPerformed
+
+    private void tableMesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMesaMouseClicked
+        if(btnNovo.isEnabled()){
+            int linha = tableMesa.getSelectedRow();
+            txtfID.setText((String) tableMesa.getValueAt(linha, 0));
+            txtfCapacidade.setText((String) tableMesa.getValueAt(linha, 1));
+            btnExcluir.setEnabled(true);
+        }
+    }//GEN-LAST:event_tableMesaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
