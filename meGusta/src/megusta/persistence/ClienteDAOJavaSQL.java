@@ -36,8 +36,8 @@ public class ClienteDAOJavaSQL extends ClienteDAO{
 
     @Override
     public boolean atualizar(Cliente cliente) {
-        String sql = "UPDATE cliente (id, nome, telefone) VALUES("
-                +cliente.getId()+", '"
+        String sql = "UPDATE cliente (cpf, nome, telefone) VALUES("
+                +cliente.getCpf()+", '"
                 +cliente.getNome()+"', '"
                 +cliente.getTelefone()+"');";
         return getConexao().executeCommand(sql);
@@ -45,13 +45,13 @@ public class ClienteDAOJavaSQL extends ClienteDAO{
 
     @Override
     public boolean excluir(Cliente cliente) {
-        String sql = "DELETE FROM cliente WHERE (id="
-                +cliente.getId()+");";
+        String sql = "DELETE FROM cliente WHERE (cpf="
+                +cliente.getCpf()+");";
         return getConexao().executeCommand(sql);
     }
 
     @Override
-    public Cliente pesquisar(int id) {
+    public Cliente pesquisar(int cpf) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -70,7 +70,7 @@ public class ClienteDAOJavaSQL extends ClienteDAO{
                 while(resultSet.next()){
                     String[] cliente = new String[3];
 
-                    cliente[0] = resultSet.getString("id");
+                    cliente[0] = resultSet.getString("cpf");
                     cliente[1] = resultSet.getString("nome");
                     cliente[2] = resultSet.getString("telefone");
 
