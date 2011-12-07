@@ -44,13 +44,22 @@ public class ReservaUI extends javax.swing.JPanel {
         btnCancelar.setEnabled(isModoEdicao);
         btnPesquisar.setEnabled(!isModoEdicao);
         tableDados.setEnabled(!isModoEdicao);
+
+        txtfId.setEditable(isModoEdicao);
+        txtfIdCliente.setEditable(isModoEdicao);
+        jSpinnerDia.setEnabled(isModoEdicao);
+        jSpinnerMes.setEnabled(isModoEdicao);
+        jSpinnerAno.setEnabled(isModoEdicao);
+        jSpinnerHora.setEnabled(isModoEdicao);
+        jSpinnerMinuto.setEnabled(isModoEdicao);
+        cbbMesa.setEnabled(isModoEdicao);
     }
 
     private void carregarTabela() {
-        String[][] funcionarios = new FuncionarioControl().pesquisar("");
+        String[][] reservas = new FuncionarioControl().pesquisar("");
         String[] colunas = {"Nome", "CPF", "Telefone", "Tipo"};
         tableDados.setModel(
-            new DefaultTableModel(funcionarios, colunas) {
+            new DefaultTableModel(reservas, colunas) {
                 @Override
                 public boolean isCellEditable(int rowIndex, int mColIndex){
                     return false;
@@ -252,8 +261,7 @@ public class ReservaUI extends javax.swing.JPanel {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jSpinnerMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(txtfId)
-                                .addComponent(txtfIdCliente)))
-                        .addGap(178, 178, 178))
+                                .addComponent(txtfIdCliente))))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtfLogging, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)))
@@ -262,12 +270,12 @@ public class ReservaUI extends javax.swing.JPanel {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(129, 129, 129)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(668, Short.MAX_VALUE)))
+                    .addContainerGap(512, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(123, 123, 123)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(674, Short.MAX_VALUE)))
+                    .addContainerGap(518, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,6 +347,8 @@ public class ReservaUI extends javax.swing.JPanel {
         jSpinnerDia.setValue(8);
         jSpinnerHora.setValue(12);
         jSpinnerMinuto.setValue(0);
+
+        cbbMesa.setSelectedIndex(0);
         
         txtfLogging.setText("...");
 }//GEN-LAST:event_btnNovoActionPerformed
