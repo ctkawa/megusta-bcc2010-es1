@@ -14,7 +14,7 @@ package megusta.view;
 import javax.swing.table.DefaultTableModel;
 import megusta.controller.FuncionarioControl;
 import megusta.controller.TipoControl;
-import megusta.model.Funcionario;
+import megusta.model.Funcionario; 
 
 /**
  *
@@ -42,12 +42,11 @@ public class FuncionarioUI extends javax.swing.JPanel {
         btnCancelar.setEnabled(isModoEdicao);
         btnPesquisar.setEnabled(!isModoEdicao);
         tableFuncionario.setEnabled(!isModoEdicao);
-        
-        /*txtfID.setEditable(isModoEdicao);*/
-        //txtfCPF.setEditable(isModoEdicao);
+        /*txtfID.setEditable(isModoEdicao);
+        txtfRG.setEditable(isModoEdicao);
         txtfNome.setEditable(isModoEdicao);
         txtfTelefone.setEditable(isModoEdicao);
-        cbbTipo.setEditable(isModoEdicao);
+        cbbTipo.setEditable(isModoEdicao);*/
     }
 
     private void carregarTabela() {
@@ -110,6 +109,8 @@ public class FuncionarioUI extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
+
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel4.setText("Telefone:");
 
@@ -212,7 +213,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtfLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+                    .addComponent(txtfLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,20 +232,20 @@ public class FuncionarioUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtfTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
-                            .addComponent(txtfNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
-                            .addComponent(txtfCPF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))))
+                            .addComponent(txtfTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                            .addComponent(txtfNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                            .addComponent(txtfCPF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(129, 129, 129)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(512, Short.MAX_VALUE)))
+                    .addContainerGap(546, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(123, 123, 123)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(518, Short.MAX_VALUE)))
+                    .addContainerGap(556, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,7 +274,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
                 .addComponent(btnCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPesquisar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtfLogging, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -282,12 +283,12 @@ public class FuncionarioUI extends javax.swing.JPanel {
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(552, Short.MAX_VALUE)))
+                    .addContainerGap(607, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(344, Short.MAX_VALUE)))
+                    .addContainerGap(395, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 

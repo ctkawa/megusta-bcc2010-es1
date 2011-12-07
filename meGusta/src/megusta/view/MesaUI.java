@@ -40,8 +40,6 @@ public class MesaUI extends javax.swing.JPanel {
         btnCancelar.setEnabled(isModoEdicao);
         btnPesquisar.setEnabled(!isModoEdicao);
         tableMesa.setEnabled(!isModoEdicao);
-        
-        txtfCapacidade.setEditable(isModoEdicao);
     }
 
     private void carregarTabela() {

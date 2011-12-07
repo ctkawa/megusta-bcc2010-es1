@@ -41,7 +41,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenuItemArquivo.setText("Menu");
+        jMenuItemArquivo.setText("Menu de Gerenciamento");
 
         jMenuItemFuncionario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemFuncionario.setText("Funcionario");
@@ -105,6 +105,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
         FuncionarioUI pnlFunc = new FuncionarioUI();
         setContentPane(pnlFunc);
         setSize(800, 600);
+        this.setTitle("Gerenciamento de Funcionários");
         validate();
     }//GEN-LAST:event_jMenuItemFuncionarioActionPerformed
 
@@ -112,27 +113,29 @@ private void jMenuItemMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         MesaUI pnlMesa = new MesaUI();
         setContentPane(pnlMesa);
         setSize(400, 550);
+        this.setTitle("Gerenciamento de Mesas");
         validate();
-
+        
 }//GEN-LAST:event_jMenuItemMesaActionPerformed
 
 private void jMenuItemReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReservaActionPerformed
         ReservaUI pnlReserva = new ReservaUI();
         setContentPane(pnlReserva);
         setSize(650, 600);
+        this.setTitle("Gerenciamento de Reservas");
         validate();
 }//GEN-LAST:event_jMenuItemReservaActionPerformed
 
     /**
     * @param args the command line arguments
     */
-    /*public static void main(String args[]) {
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ApplicationFrame().setVisible(true);
             }
         });
-    }*/
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jBarraMenu;
