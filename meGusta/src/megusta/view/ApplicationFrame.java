@@ -71,7 +71,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
         jMenuItemArquivo.add(jMenuItemReserva);
 
         jMenuItemCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItemCliente.setText("Cliente");
+        jMenuItemCliente.setText("Gerenciamento de Clientes");
         jMenuItemCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenuItemClienteMouseClicked(evt);
