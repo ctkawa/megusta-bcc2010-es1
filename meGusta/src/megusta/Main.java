@@ -5,7 +5,6 @@
 
 package megusta;
 
-import megusta.view.ApplicationFrame;
 import megusta.view.Login;
 /**
  *

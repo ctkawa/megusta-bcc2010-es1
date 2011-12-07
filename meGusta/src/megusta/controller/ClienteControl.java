@@ -33,14 +33,16 @@ public class ClienteControl extends ApplicationControl{
         return new ClienteDAOJavaSQL().atualizar(cliente);
     }
 
-    @Override
-    public Entity pesquisar(int id) {
-        return new ClienteDAOJavaSQL().pesquisar(id);
-    }
+    
 
     @Override
     public String[][] pesquisar(String condicao) {
         return new ClienteDAOJavaSQL().pesquisar(condicao);
+    }
+
+    @Override
+    public Entity pesquisar(int id) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 

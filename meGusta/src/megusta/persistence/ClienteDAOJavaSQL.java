@@ -51,8 +51,28 @@ public class ClienteDAOJavaSQL extends ClienteDAO{
     }
 
     @Override
-    public Cliente pesquisar(int cpf) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Cliente pesquisarCpf(String cpf) {
+        String sql = "SELECT * FROM cliente WHERE (cpf='" + cpf + "');";
+        
+        ConexaoJavaSQL conn = getConexao();
+        ResultSet resultSet = conn.executeQuery(sql);
+        List<String[]> clientes = new ArrayList<String[]>();
+        int numLinhas = 0;
+        try {
+            if(resultSet != null && resultSet.next()){
+                return new Cliente(resultSet.getString("cpf"), resultSet.getString("nome"), resultSet.getString("telefone"));
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            StackTraceElement[] stack = e.getStackTrace();
+            if(stack.length > 0){
+                System.err.println("Message: " + e.getMessage());
+                System.err.println("Command: " + sql);
+                System.err.println("Exceprion: " + e);
+            }
+        }
+        return null;
     }
 
     @Override

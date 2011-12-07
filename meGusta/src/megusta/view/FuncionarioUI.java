@@ -42,11 +42,12 @@ public class FuncionarioUI extends javax.swing.JPanel {
         btnCancelar.setEnabled(isModoEdicao);
         btnPesquisar.setEnabled(!isModoEdicao);
         tableFuncionario.setEnabled(!isModoEdicao);
-        /*txtfID.setEditable(isModoEdicao);
-        txtfRG.setEditable(isModoEdicao);
+        
+        /*txtfID.setEditable(isModoEdicao);*/
+        //txtfCPF.setEditable(isModoEdicao);
         txtfNome.setEditable(isModoEdicao);
         txtfTelefone.setEditable(isModoEdicao);
-        cbbTipo.setEditable(isModoEdicao);*/
+        cbbTipo.setEditable(isModoEdicao);
     }
 
     private void carregarTabela() {

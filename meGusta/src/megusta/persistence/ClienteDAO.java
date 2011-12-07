@@ -15,6 +15,6 @@ public abstract class ClienteDAO extends ApplicationDAO{
     public abstract boolean salvar(Cliente cliente);
     public abstract boolean atualizar(Cliente cliente);
     public abstract boolean excluir(Cliente cliente);
-    public abstract Cliente pesquisar(int id);
+    public abstract Cliente pesquisarCpf(String cpf);
     public abstract String[][] pesquisar(String condicao);
 }
