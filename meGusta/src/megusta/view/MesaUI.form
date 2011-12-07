@@ -37,8 +37,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtfID" pref="135" max="32767" attributes="1"/>
-                          <Component id="txtfCapacidade" alignment="0" pref="135" max="32767" attributes="1"/>
+                          <Component id="txtfID" pref="168" max="32767" attributes="1"/>
+                          <Component id="txtfCapacidade" alignment="0" pref="168" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <Component id="txtfLogging" alignment="0" pref="367" max="32767" attributes="1"/>
