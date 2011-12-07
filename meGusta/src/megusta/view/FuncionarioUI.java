@@ -30,23 +30,21 @@ public class FuncionarioUI extends javax.swing.JPanel {
         setTipo();
         setControls(!MODO_EDICAO);
         carregarTabela();
+
     }
 
     // Ativar/Desativar botoes
     private void setControls(boolean isModoEdicao) {
         btnNovo.setEnabled(!isModoEdicao);
         btnAtualizar.setEnabled(!isModoEdicao);
-        //btnExcluir.setEnabled(!isModoEdicao);
-        btnExcluir.setEnabled(false);
         btnSalvar.setEnabled(isModoEdicao);
         btnCancelar.setEnabled(isModoEdicao);
         btnPesquisar.setEnabled(!isModoEdicao);
         tableFuncionario.setEnabled(!isModoEdicao);
-        /*txtfID.setEditable(isModoEdicao);
-        txtfRG.setEditable(isModoEdicao);
-        txtfNome.setEditable(isModoEdicao);
-        txtfTelefone.setEditable(isModoEdicao);
-        cbbTipo.setEditable(isModoEdicao);*/
+
+        btnExcluir.setEnabled(false);
+        btnAtualizar.setEnabled(false);
+        
     }
 
     private void carregarTabela() {
@@ -110,6 +108,13 @@ public class FuncionarioUI extends javax.swing.JPanel {
 
         jLabel5.setText("jLabel5");
 
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("Telefone:");
 
         tableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
@@ -134,6 +139,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
 
         jLabel2.setText("Nome:");
 
+        txtfTelefone.setNextFocusableComponent(cbbTipo);
         txtfTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtfTelefoneActionPerformed(evt);
@@ -142,11 +148,19 @@ public class FuncionarioUI extends javax.swing.JPanel {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        txtfCPF.setNextFocusableComponent(txtfTelefone);
         txtfCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtfCPFActionPerformed(evt);
             }
         });
+        txtfCPF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtfCPFFocusGained(evt);
+            }
+        });
+
+        txtfNome.setNextFocusableComponent(txtfCPF);
 
         txtfLogging.setEditable(false);
         txtfLogging.setText("Log");
@@ -211,7 +225,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtfLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+                    .addComponent(txtfLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,20 +244,20 @@ public class FuncionarioUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtfTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
-                            .addComponent(txtfNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
-                            .addComponent(txtfCPF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))))
+                            .addComponent(txtfTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                            .addComponent(txtfNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                            .addComponent(txtfCPF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(129, 129, 129)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(512, Short.MAX_VALUE)))
+                    .addContainerGap(580, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(123, 123, 123)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(518, Short.MAX_VALUE)))
+                    .addContainerGap(586, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,7 +286,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
                 .addComponent(btnCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPesquisar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtfLogging, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -281,12 +295,12 @@ public class FuncionarioUI extends javax.swing.JPanel {
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(552, Short.MAX_VALUE)))
+                    .addContainerGap(654, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(344, Short.MAX_VALUE)))
+                    .addContainerGap(446, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -295,11 +309,31 @@ public class FuncionarioUI extends javax.swing.JPanel {
 }//GEN-LAST:event_txtfTelefoneActionPerformed
 
     private void txtfCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCPFActionPerformed
-        // TODO add your handling code here:
+        
 }//GEN-LAST:event_txtfCPFActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        // TODO add your handling code here:
+        if(cbbTipo.getSelectedIndex()==0){
+            txtfLogging.setText("Informe o tipo do funcionario.");
+            return;
+        }
+        
+
+        Funcionario funcionario = new Funcionario(
+                txtfNome.getText(),
+                txtfCPF.getText(),
+                txtfTelefone.getText(),
+                cbbTipo.getSelectedIndex()
+        );
+
+        if (new FuncionarioControl().atualizar(funcionario)){
+            txtfLogging.setText("O funcionario foi atualizado com sucesso.");
+            setControls(!MODO_EDICAO);
+            carregarTabela();
+        }else{
+            txtfLogging.setText("O funcionario nao pode ser atualizado.");
+        }
+        
 }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -307,18 +341,29 @@ public class FuncionarioUI extends javax.swing.JPanel {
         txtfNome.setText("");
         txtfCPF.setText("");
         txtfTelefone.setText("");
+        cbbTipo.setSelectedIndex(0);
         txtfLogging.setText("...");
 }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        int cpf = Integer.parseInt(txtfCPF.getText());
-        Funcionario funcionario = (Funcionario) new FuncionarioControl().pesquisar(cpf);
+        Funcionario funcionario = (Funcionario) new FuncionarioControl().pesquisarCPF(txtfCPF.getText());
         if(funcionario == null){
-            txtfLogging.setText("Nenhum funcionario foi encontrado com a condicao.");
+            txtfLogging.setText("Nenhum funcionario foi encontrado com o CPF.");
         }else{
             txtfNome.setText(funcionario.getNome());
             txtfCPF.setText(funcionario.getCpf());
             txtfTelefone.setText(""+funcionario.getTelefone());
+
+            //System.out.println("tipo :"+funcionario.getTipo());
+            String[][] tipos = new TipoControl().pesquisar("");
+            for(String[] row : tipos){
+                //System.out.println("   tbl["+row[0]+"]:"+row[1]);
+                if(row[0].equals(""+funcionario.getTipo())){
+                    cbbTipo.setSelectedIndex(Integer.parseInt(row[0]));
+                }
+            }
+            
+
             txtfLogging.setText("... retornado ...");
         }
 }//GEN-LAST:event_btnPesquisarActionPerformed
@@ -332,6 +377,15 @@ public class FuncionarioUI extends javax.swing.JPanel {
 }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if(cbbTipo.getSelectedIndex()==0){
+            txtfLogging.setText("Informe o tipo do funcionario.");
+            return;
+        }
+        if(txtfNome.getText().equalsIgnoreCase("") || txtfTelefone.getText().equalsIgnoreCase("") || txtfCPF.getText().equalsIgnoreCase("")){
+            txtfLogging.setText("Entre com as informaçoes do funcionario.");
+            return;
+        }
+        
         Funcionario funcionario = new Funcionario(
                 txtfNome.getText(),
                 txtfCPF.getText(),
@@ -344,7 +398,7 @@ public class FuncionarioUI extends javax.swing.JPanel {
             setControls(!MODO_EDICAO);
             carregarTabela();
         }else{
-            txtfLogging.setText("O funcionario nao pode ser atualizado.");
+            txtfLogging.setText("O funcionario nao pode ser atualizado, verifique se o CPF ja e cadastrado.");
         }
 }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -388,8 +442,17 @@ public class FuncionarioUI extends javax.swing.JPanel {
                 }
             }
             btnExcluir.setEnabled(true);
+            btnAtualizar.setEnabled(true);
         }
     }//GEN-LAST:event_tableFuncionarioMouseClicked
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+        //btnAtualizar.setEnabled(false);
+    }//GEN-LAST:event_formKeyTyped
+
+    private void txtfCPFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfCPFFocusGained
+        //btnAtualizar.setEnabled(false);
+    }//GEN-LAST:event_txtfCPFFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

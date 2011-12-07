@@ -34,15 +34,19 @@ public class FuncionarioControl extends ApplicationControl{
     }
 
     @Override
-    public Entity pesquisar(int id) {
-        return new FuncionarioDAOJavaSQL().pesquisar(id);
-    }
-
-    @Override
     public String[][] pesquisar(String condicao) {
         return new FuncionarioDAOJavaSQL().pesquisar(condicao);
     }
 
+    @Override
+    public Entity pesquisar(int id) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+
+    public Entity pesquisarCPF(String cpf) {
+        return new FuncionarioDAOJavaSQL().pesquisarCPF(cpf);
+    }
 
 
 }

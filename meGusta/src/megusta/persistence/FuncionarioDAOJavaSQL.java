@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import megusta.model.Entity;
 import megusta.model.Funcionario;
 
 /**
@@ -38,11 +39,12 @@ public class FuncionarioDAOJavaSQL extends FuncionarioDAO{
 
     @Override
     public boolean atualizar(Funcionario funcionario) {
-        String sql = "UPDATE funcionario (nome, cpf, telefone, tipo) VALUES("
-                +funcionario.getNome()+"', '"
-                +funcionario.getCpf()+"', '"
-                +funcionario.getTelefone()+"', '"
-                +funcionario.getTipo()+"');";
+        String sql = "UPDATE funcionario SET "
+                + " nome='"+funcionario.getNome()+"', "
+                + " telefone='"+funcionario.getTelefone()+"', "
+                + " tipo='"+funcionario.getTipo()+"'"
+                + " WHERE cpf='"+funcionario.getCpf()+"';";
+        System.out.println("Mandando comando SQL: "+sql);
         return getConexao().executeCommand(sql);
     }
 
@@ -92,6 +94,35 @@ public class FuncionarioDAOJavaSQL extends FuncionarioDAO{
         }
 
         return funcionarios.toArray(new String[numLinhas][4]);
+    }
+
+    public Entity pesquisarCPF(String cpf) {
+        String sql = "SELECT * FROM funcionario WHERE cpf = '" + cpf + "';";
+
+        ConexaoJavaSQL conn = getConexao();
+        ResultSet resultSet = conn.executeQuery(sql);
+        List<String[]> funcionarios = new ArrayList<String[]>();
+
+        try {
+            if(resultSet != null && resultSet.next()){
+                    Funcionario funcionario = new Funcionario(
+                            resultSet.getString("nome"),
+                            resultSet.getString("cpf"),
+                            resultSet.getString("telefone"),
+                            Integer.parseInt(resultSet.getString("tipo"))
+                            );
+                    return funcionario;
+            }
+        } catch (SQLException e) {
+            StackTraceElement[] stack = e.getStackTrace();
+            if(stack.length > 0){
+                System.err.println("Message: " + e.getMessage());
+                System.err.println("Command: " + sql);
+                System.err.println("Exceprion: " + e);
+            }
+        }
+
+        return null;
     }
 
 }
