@@ -5,8 +5,8 @@
 
 package megusta;
 
-import megusta.veiw.ApplicationFrame;
-
+import megusta.view.ApplicationFrame;
+import megusta.view.Login;
 /**
  *
  * @author cleber
@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ApplicationFrame().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }
