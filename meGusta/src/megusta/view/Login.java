@@ -36,8 +36,8 @@ public class Login extends javax.swing.JFrame {
         btnSair = new javax.swing.JButton();
         lblUsuario = new javax.swing.JLabel();
         lblUsuario1 = new javax.swing.JLabel();
-        txtSenha = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,7 +58,7 @@ public class Login extends javax.swing.JFrame {
         lblUsuario.setFont(new java.awt.Font("Tahoma", 0, 12));
         lblUsuario.setText("Usuário:");
 
-        lblUsuario1.setFont(new java.awt.Font("Tahoma", 0, 12));
+        lblUsuario1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblUsuario1.setText("Senha:");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18));
@@ -68,43 +68,43 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                        .addComponent(btnEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                         .addGap(31, 31, 31)
-                        .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                        .addGap(55, 55, 55))
+                        .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                             .addComponent(jLabel1)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(102, 102, 102))))
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+                        .addGap(47, 47, 47)))
+                .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsuario1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                    .addComponent(lblUsuario1, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                     .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44))
+                .addGap(47, 47, 47))
         );
 
         pack();
@@ -160,9 +160,9 @@ private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JLabel lblUsuario1;
-    private javax.swing.JTextField txtSenha;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
