@@ -20,7 +20,6 @@ public class ApplicationFrame extends javax.swing.JFrame {
     /** Creates new form ApplicationFrame */
     public ApplicationFrame() {
         initComponents();
-        this.setLocationRelativeTo(null);
     }
 
     /** This method is called from within the constructor to
@@ -37,6 +36,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
         jMenuItemFuncionario = new javax.swing.JMenuItem();
         jMenuItemMesa = new javax.swing.JMenuItem();
         jMenuItemReserva = new javax.swing.JMenuItem();
+        jMenuItemCliente = new javax.swing.JMenuItem();
         jMenuItemSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,7 +44,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
         jMenuItemArquivo.setText("Menu de Gerenciamento");
 
         jMenuItemFuncionario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItemFuncionario.setText("Funcionario");
+        jMenuItemFuncionario.setText("Gerenciamento de Funcionários");
         jMenuItemFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemFuncionarioActionPerformed(evt);
@@ -53,7 +53,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
         jMenuItemArquivo.add(jMenuItemFuncionario);
 
         jMenuItemMesa.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItemMesa.setText("Mesa");
+        jMenuItemMesa.setText("Gerenciamento de Mesas");
         jMenuItemMesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemMesaActionPerformed(evt);
@@ -62,13 +62,27 @@ public class ApplicationFrame extends javax.swing.JFrame {
         jMenuItemArquivo.add(jMenuItemMesa);
 
         jMenuItemReserva.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItemReserva.setText("Reserva");
+        jMenuItemReserva.setText("Gerenciamento de Reservas");
         jMenuItemReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemReservaActionPerformed(evt);
             }
         });
         jMenuItemArquivo.add(jMenuItemReserva);
+
+        jMenuItemCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemCliente.setText("Cliente");
+        jMenuItemCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItemClienteMouseClicked(evt);
+            }
+        });
+        jMenuItemCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemClienteActionPerformed(evt);
+            }
+        });
+        jMenuItemArquivo.add(jMenuItemCliente);
 
         jMenuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemSair.setText("Sair");
@@ -105,7 +119,6 @@ public class ApplicationFrame extends javax.swing.JFrame {
         FuncionarioUI pnlFunc = new FuncionarioUI();
         setContentPane(pnlFunc);
         setSize(800, 600);
-        this.setTitle("Gerenciamento de Funcionários");
         validate();
     }//GEN-LAST:event_jMenuItemFuncionarioActionPerformed
 
@@ -113,33 +126,43 @@ private void jMenuItemMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         MesaUI pnlMesa = new MesaUI();
         setContentPane(pnlMesa);
         setSize(400, 550);
-        this.setTitle("Gerenciamento de Mesas");
         validate();
-        
+
 }//GEN-LAST:event_jMenuItemMesaActionPerformed
 
 private void jMenuItemReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReservaActionPerformed
         ReservaUI pnlReserva = new ReservaUI();
         setContentPane(pnlReserva);
         setSize(650, 600);
-        this.setTitle("Gerenciamento de Reservas");
         validate();
 }//GEN-LAST:event_jMenuItemReservaActionPerformed
+
+private void jMenuItemClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemClienteMouseClicked
+
+}//GEN-LAST:event_jMenuItemClienteMouseClicked
+
+private void jMenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteActionPerformed
+    ClienteUI pnlCliente = new ClienteUI();
+    setContentPane(pnlCliente);
+    setSize(650, 600);
+    validate();
+}//GEN-LAST:event_jMenuItemClienteActionPerformed
 
     /**
     * @param args the command line arguments
     */
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ApplicationFrame().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jBarraMenu;
     private javax.swing.JMenu jMenuItemArquivo;
+    private javax.swing.JMenuItem jMenuItemCliente;
     private javax.swing.JMenuItem jMenuItemFuncionario;
     private javax.swing.JMenuItem jMenuItemMesa;
     private javax.swing.JMenuItem jMenuItemReserva;

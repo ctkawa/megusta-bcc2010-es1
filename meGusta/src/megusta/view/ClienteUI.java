@@ -12,9 +12,8 @@
 package megusta.view;
 
 import javax.swing.table.DefaultTableModel;
-import megusta.controller.FuncionarioControl;
-import megusta.controller.TipoControl;
-import megusta.model.Funcionario;
+import megusta.controller.ClienteControl;
+import megusta.model.Cliente;
 
 /**
  *
@@ -27,7 +26,6 @@ public class ClienteUI extends javax.swing.JPanel {
     /** CONSTRUTOR  Creates new form FuncionarioUI2 */
     public ClienteUI() {
         initComponents();
-        setTipo();
         setControls(!MODO_EDICAO);
         carregarTabela();
     }
@@ -49,10 +47,10 @@ public class ClienteUI extends javax.swing.JPanel {
     }
 
     private void carregarTabela() {
-        String[][] funcionarios = new FuncionarioControl().pesquisar("");
-        String[] colunas = {"Nome", "CPF", "Telefone", "Tipo"};
+        String[][] clientes = new ClienteControl().pesquisar("");
+        String[] colunas = {"Nome", "CPF", "Telefone"};
         tableFuncionario.setModel(
-            new DefaultTableModel(funcionarios, colunas) {
+            new DefaultTableModel(clientes, colunas) {
                 @Override
                 public boolean isCellEditable(int rowIndex, int mColIndex){
                     return false;
@@ -62,14 +60,6 @@ public class ClienteUI extends javax.swing.JPanel {
         validate();
     }
 
-    // carregar conteudo do combobox
-    private void setTipo(){
-        String[][] tipos = new TipoControl().pesquisar("");
-        for(String[] tipo:tipos){
-            cbbTipo.insertItemAt(tipo[1], Integer.parseInt(tipo[0]));
-        }
-        
-    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -98,8 +88,6 @@ public class ClienteUI extends javax.swing.JPanel {
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        cbbTipo = new javax.swing.JComboBox();
-        jLabel6 = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
 
@@ -188,15 +176,6 @@ public class ClienteUI extends javax.swing.JPanel {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        cbbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "escolha..." }));
-        cbbTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbTipoActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("Tipo:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -218,11 +197,9 @@ public class ClienteUI extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtfTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
                             .addComponent(txtfNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
                             .addComponent(txtfCPF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))))
@@ -257,10 +234,7 @@ public class ClienteUI extends javax.swing.JPanel {
                     .addComponent(jLabel4)
                     .addComponent(txtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar)
-                    .addComponent(jLabel6)
-                    .addComponent(cbbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSalvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -305,13 +279,13 @@ public class ClienteUI extends javax.swing.JPanel {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         int cpf = Integer.parseInt(txtfCPF.getText());
-        Funcionario funcionario = (Funcionario) new FuncionarioControl().pesquisar(cpf);
-        if(funcionario == null){
+        Cliente cliente = (Cliente) new ClienteControl().pesquisar(cpf);
+        if(cliente == null){
             txtfLogging.setText("Nenhum cliente foi encontrado com condicao.");
         }else{
-            txtfNome.setText(funcionario.getNome());
-            txtfCPF.setText(funcionario.getCpf());
-            txtfTelefone.setText(""+funcionario.getTelefone());
+            txtfNome.setText(cliente.getNome());
+            txtfCPF.setText(cliente.getCpf());
+            txtfTelefone.setText(""+cliente.getTelefone());
             txtfLogging.setText("... retornado ...");
         }
 }//GEN-LAST:event_btnPesquisarActionPerformed
@@ -325,14 +299,13 @@ public class ClienteUI extends javax.swing.JPanel {
 }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Funcionario funcionario = new Funcionario(
-                txtfNome.getText(),
+        Cliente cliente = new Cliente(
                 txtfCPF.getText(),
-                txtfTelefone.getText(),
-                cbbTipo.getSelectedIndex()
+                txtfNome.getText(),
+                txtfTelefone.getText()
         );
 
-        if (new FuncionarioControl().salvar(funcionario)){
+        if (new ClienteControl().salvar(cliente)){
             txtfLogging.setText("O cliente foi cadastrado com sucesso.");
             setControls(!MODO_EDICAO);
             carregarTabela();
@@ -345,18 +318,12 @@ public class ClienteUI extends javax.swing.JPanel {
         //if ( new ClienteControl().excluir(cliente));
 }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void cbbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbbTipoActionPerformed
-
     private void tableFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableFuncionarioMouseClicked
         if(btnNovo.isEnabled()){
             int linha = tableFuncionario.getSelectedRow();
             txtfNome.setText((String) tableFuncionario.getValueAt(linha, 0));
             txtfCPF.setText((String) tableFuncionario.getValueAt(linha, 1));
             txtfTelefone.setText((String) tableFuncionario.getValueAt(linha, 2));
-            //cbbTipo.setSelectedItem((String) tableFuncionario.getValueAt(linha, 4));
-            cbbTipo.setSelectedIndex(Integer.parseInt((String) tableFuncionario.getValueAt(linha, 3)));
         }
     }//GEN-LAST:event_tableFuncionarioMouseClicked
 
@@ -368,12 +335,10 @@ public class ClienteUI extends javax.swing.JPanel {
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox cbbTipo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

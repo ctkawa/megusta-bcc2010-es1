@@ -28,7 +28,8 @@ public class ClienteDAOJavaSQL extends ClienteDAO{
     
     @Override
     public boolean salvar(Cliente cliente) {
-        String sql = "INSERT INTO cliente (nome, telefone) VALUES('"
+        String sql = "INSERT INTO cliente (cpf, nome, telefone) VALUES('"
+                +cliente.getCpf()+"', '"
                 +cliente.getNome()+"', '"
                 +cliente.getTelefone()+"');";
         return getConexao().executeCommand(sql);
