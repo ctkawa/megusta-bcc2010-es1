@@ -261,7 +261,7 @@ public class ReservaUI extends javax.swing.JPanel {
             }
         });
 
-        jLabel6.setText("Poltronas:");
+        jLabel6.setText("Qtd. pessoas:");
 
         jLabel1.setText("Data:");
 
@@ -324,12 +324,12 @@ public class ReservaUI extends javax.swing.JPanel {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(129, 129, 129)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(512, Short.MAX_VALUE)))
+                    .addContainerGap(514, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(123, 123, 123)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(518, Short.MAX_VALUE)))
+                    .addContainerGap(520, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -475,7 +475,45 @@ public class ReservaUI extends javax.swing.JPanel {
 }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        //if ( new ClienteControl().excluir(cliente));
+        Reserva reserva = new Reserva(
+                // (int id, Date dataHora, String cpf_cli, int id_mesa, boolean penalizado, Date penalizado_ate)
+                //Integer.parseInt(txtfId.getText()),
+                Integer.parseInt(txtfId.getText()),
+                new Date(),
+                txtfCPFCliente.getText(),
+                cbbMesa.getSelectedIndex(),
+                false,
+                null//new Date() // penalizado ate
+        );
+
+        if (new ReservaControl().excluir(reserva)){
+            txtfLogging.setText("a reserva foi excluido com sucesso.");
+            setControls(!MODO_EDICAO);
+            carregarTabela();
+            btnExcluir.setEnabled(false);
+
+            txtfId.setText("");
+            txtfCPFCliente.setText("");
+            /* Rascunho, obter valor de agora */
+            jSpinnerAno.setValue(2011);
+            jSpinnerMes.setValue(12);
+            jSpinnerDia.setValue(8);
+            jSpinnerHora.setValue(12);
+            jSpinnerMinuto.setValue(0);
+
+            /*String data = (String) tableDados.getValueAt(linha, 1);
+            Calendar cal = Calendar.getInstance();
+            jSpinnerAno.setValue(Integer.parseInt(data.substring(0, 4)));
+            jSpinnerMes.setValue(Integer.parseInt(data.substring(5, 7)));
+            jSpinnerDia.setValue(Integer.parseInt(data.substring(8, 10)));
+            jSpinnerHora.setValue(Integer.parseInt(data.substring(11, 13)));
+            jSpinnerMinuto.setValue(Integer.parseInt(data.substring(14, 16)));*/
+
+            cbbMesa.setSelectedIndex(0);
+
+        }else{
+            txtfLogging.setText("A mesa nao pode ser excluido.");
+        }
 }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void cbbMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMesaActionPerformed
@@ -502,6 +540,9 @@ public class ReservaUI extends javax.swing.JPanel {
             jSpinnerMinuto.setValue(Integer.parseInt(data.substring(14, 16)));
 
             cbbMesa.setSelectedIndex(Integer.parseInt((String) tableDados.getValueAt(linha, 3)));
+
+            btnExcluir.setEnabled(true);
+            btnAtualizar.setEnabled(true);
         } else {
             setControls(!MODO_EDICAO);
         }
