@@ -40,6 +40,7 @@ public class MesaControl extends ApplicationControl{
 
     @Override
     public String[][] pesquisar(String condicao) {
+        System.out.println("mesacontrol.pesquisar: "+condicao);
         return new MesaDAOJavaSQL().pesquisar(condicao);
     }
 

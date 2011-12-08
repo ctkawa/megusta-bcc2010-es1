@@ -12,6 +12,7 @@
 package megusta.view;
 
 
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import megusta.controller.MesaControl;
@@ -25,11 +26,14 @@ import megusta.model.Reserva;
 public class ReservaUI extends javax.swing.JPanel {
 
     private static final boolean MODO_EDICAO = true;
+    private int[] id_mesa;
 
     /** CONSTRUTOR  Creates new form FuncionarioUI2 */
     public ReservaUI() {
         initComponents();
-        setMesa();
+        id_mesa = new int[100];
+        
+        setMesa(null);
         setControls(MODO_EDICAO);
         carregarTabela();
     }
@@ -56,7 +60,7 @@ public class ReservaUI extends javax.swing.JPanel {
 
     private void carregarTabela() {
         String[][] reservas = new ReservaControl().pesquisar("");
-        String[] colunas = {"ID", "DATA", "id_cli", "id_mesa", "penalizado", "penalizado_ate"};
+        String[] colunas = {"ID", "DATA", "CPF Cliente", "id_mesa", "penalizado", "penalizado_ate"};
         tableDados.setModel(
             new DefaultTableModel(reservas, colunas) {
                 @Override
@@ -68,13 +72,59 @@ public class ReservaUI extends javax.swing.JPanel {
         validate();
     }
 
+
+
     // carregar conteudo do combobox
-    private void setMesa(){
-        String[][] mesas = new MesaControl().pesquisar("");
-        for(String[] mesa:mesas){
-            cbbMesa.insertItemAt(mesa[1], Integer.parseInt(mesa[0]));
+
+
+    private void setMesa(Date datahora){
+        while(cbbMesa.getItemCount()>1)
+            cbbMesa.removeItemAt(1);
+        String[][] mesas;
+        if(datahora != null){
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(datahora);
+            Calendar calfim = Calendar.getInstance();
+            calfim.setTime(datahora);
+            calfim.add(Calendar.HOUR, 2);
+            System.out.println("LIST mesa que nao esta na reserva entre "+sdf.format(cal.getTime()).toString()+" e "+sdf.format(calfim.getTime()).toString());
+            mesas = new MesaControl().pesquisar("mesa.id NOT IN (SELECT id_mesa FROM reserva "
+                    + "WHERE data < '" +sdf.format(cal.getTime())+ "'"
+                    + "OR   data > '" +sdf.format(calfim.getTime())+ "')");
+            int i=1;
+            for(String[] mesa:mesas){
+                id_mesa[i] = Integer.parseInt(mesa[0]);
+                cbbMesa.insertItemAt(mesa[1], i);
+                i++;
+                System.out.println("i:"+i);
+            }
+        } else {
+            mesas = new MesaControl().pesquisar("");
+            System.out.println("LIST ALL MESA");
+            int i=1;
+            for(String[] mesa:mesas){
+                id_mesa[i] = Integer.parseInt(mesa[0]);
+                cbbMesa.insertItemAt(mesa[1], i);
+                i++;
+                System.out.println("null i:"+i);
+            }
         }
         
+        
+
+    }
+
+    private void refinarCbbMesa(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(
+                Integer.parseInt(jSpinnerAno.getValue().toString()),
+                Integer.parseInt(jSpinnerMes.getValue().toString()),
+                Integer.parseInt(jSpinnerDia.getValue().toString()),
+                Integer.parseInt(jSpinnerHora.getValue().toString()),
+                Integer.parseInt(jSpinnerMinuto.getValue().toString()
+            ));
+        setMesa(cal.getTime());
     }
 
     /** This method is called from within the constructor to
@@ -205,8 +255,13 @@ public class ReservaUI extends javax.swing.JPanel {
                 cbbMesaActionPerformed(evt);
             }
         });
+        cbbMesa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cbbMesaFocusGained(evt);
+            }
+        });
 
-        jLabel6.setText("Mesa:");
+        jLabel6.setText("Poltronas:");
 
         jLabel1.setText("Data:");
 
@@ -350,6 +405,8 @@ public class ReservaUI extends javax.swing.JPanel {
         cbbMesa.setSelectedIndex(0);
         
         txtfLogging.setText("...");
+
+        refinarCbbMesa();
 }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -378,11 +435,13 @@ public class ReservaUI extends javax.swing.JPanel {
         txtfId.setText("");
         txtfCPFCliente.setText("");
 
+        /*
         jSpinnerAno.setValue(2011);
         jSpinnerMes.setValue(12);
         jSpinnerDia.setValue(8);
         jSpinnerHora.setValue(12);
         jSpinnerMinuto.setValue(0);
+        */
 
         cbbMesa.setSelectedIndex(0);
 
@@ -424,24 +483,37 @@ public class ReservaUI extends javax.swing.JPanel {
     }//GEN-LAST:event_cbbMesaActionPerformed
 
     private void tableDadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDadosMouseClicked
+        
         if(btnNovo.isEnabled()){
             int linha = tableDados.getSelectedRow();
             txtfId.setText((String) tableDados.getValueAt(linha, 0));
-            txtfCPFCliente.setText((String) tableDados.getValueAt(linha, 1));
+            txtfCPFCliente.setText((String) tableDados.getValueAt(linha, 2));
 
-            jSpinnerAno.setValue(1);
-            jSpinnerMes.setValue(2);
-            jSpinnerDia.setValue(3);
-            jSpinnerHora.setValue(4);
-            jSpinnerMinuto.setValue(5);
+
+            // yyyy-mm-dd hh:mm:ss.s
+            String data = (String) tableDados.getValueAt(linha, 1);
+            Calendar cal = Calendar.getInstance();
+            
+
+            jSpinnerAno.setValue(Integer.parseInt(data.substring(0, 4)));
+            jSpinnerMes.setValue(Integer.parseInt(data.substring(5, 7)));
+            jSpinnerDia.setValue(Integer.parseInt(data.substring(8, 10)));
+            jSpinnerHora.setValue(Integer.parseInt(data.substring(11, 13)));
+            jSpinnerMinuto.setValue(Integer.parseInt(data.substring(14, 16)));
 
             cbbMesa.setSelectedIndex(Integer.parseInt((String) tableDados.getValueAt(linha, 3)));
+        } else {
+            setControls(!MODO_EDICAO);
         }
     }//GEN-LAST:event_tableDadosMouseClicked
 
 private void txtfIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfIdActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_txtfIdActionPerformed
+
+private void cbbMesaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbbMesaFocusGained
+    refinarCbbMesa();
+}//GEN-LAST:event_cbbMesaFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

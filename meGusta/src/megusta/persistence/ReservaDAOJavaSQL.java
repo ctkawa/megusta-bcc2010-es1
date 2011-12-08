@@ -68,6 +68,7 @@ public class ReservaDAOJavaSQL extends ReservaDAO{
     public String[][] pesquisar(String condicao) {
         String sql = "SELECT * FROM reserva" +
                 (condicao.equals("") ? ";" : " WHERE " + condicao + ";");
+        System.out.println("Mandando comando SQL: "+sql);
 
         ConexaoJavaSQL conn = getConexao();
         ResultSet resultSet = conn.executeQuery(sql);

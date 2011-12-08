@@ -80,6 +80,8 @@ public class MesaDAOJavaSQL extends MesaDAO{
         String sql = "SELECT * FROM mesa" +
                 (condicao.equals("") ? ";" : " WHERE " + condicao + ";");
 
+        System.out.println("Mandando comando SQL: "+sql);
+
         ConexaoJavaSQL conn = getConexao();
         ResultSet resultSet = conn.executeQuery(sql);
         List<String[]> mesas = new ArrayList<String[]>();
