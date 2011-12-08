@@ -14,9 +14,8 @@ package megusta.view;
 
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
-import megusta.controller.FuncionarioControl;
+import megusta.controller.MesaControl;
 import megusta.controller.ReservaControl;
-import megusta.controller.TipoControl;
 import megusta.model.Reserva;
 
 /**
@@ -30,7 +29,7 @@ public class ReservaUI extends javax.swing.JPanel {
     /** CONSTRUTOR  Creates new form FuncionarioUI2 */
     public ReservaUI() {
         initComponents();
-        setTipo();
+        setMesa();
         setControls(MODO_EDICAO);
         carregarTabela();
     }
@@ -45,19 +44,19 @@ public class ReservaUI extends javax.swing.JPanel {
         btnPesquisar.setEnabled(!isModoEdicao);
         tableDados.setEnabled(!isModoEdicao);
 
-        txtfId.setEditable(isModoEdicao);
-        txtfIdCliente.setEditable(isModoEdicao);
+        txtfId.setEditable(!isModoEdicao);
+        /*txtfCPFCliente.setEditable(isModoEdicao);
         jSpinnerDia.setEnabled(isModoEdicao);
         jSpinnerMes.setEnabled(isModoEdicao);
         jSpinnerAno.setEnabled(isModoEdicao);
         jSpinnerHora.setEnabled(isModoEdicao);
         jSpinnerMinuto.setEnabled(isModoEdicao);
-        cbbMesa.setEnabled(isModoEdicao);
+        cbbMesa.setEnabled(isModoEdicao);*/
     }
 
     private void carregarTabela() {
-        String[][] reservas = new FuncionarioControl().pesquisar("");
-        String[] colunas = {"Nome", "CPF", "Telefone", "Tipo"};
+        String[][] reservas = new ReservaControl().pesquisar("");
+        String[] colunas = {"ID", "DATA", "id_cli", "id_mesa", "penalizado", "penalizado_ate"};
         tableDados.setModel(
             new DefaultTableModel(reservas, colunas) {
                 @Override
@@ -70,10 +69,10 @@ public class ReservaUI extends javax.swing.JPanel {
     }
 
     // carregar conteudo do combobox
-    private void setTipo(){
-        String[][] tipos = new TipoControl().pesquisar("");
-        for(String[] tipo:tipos){
-            cbbMesa.insertItemAt(tipo[1], Integer.parseInt(tipo[0]));
+    private void setMesa(){
+        String[][] mesas = new MesaControl().pesquisar("");
+        for(String[] mesa:mesas){
+            cbbMesa.insertItemAt(mesa[1], Integer.parseInt(mesa[0]));
         }
         
     }
@@ -94,7 +93,7 @@ public class ReservaUI extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        txtfIdCliente = new javax.swing.JTextField();
+        txtfCPFCliente = new javax.swing.JTextField();
         txtfId = new javax.swing.JTextField();
         txtfLogging = new javax.swing.JTextField();
         btnAtualizar = new javax.swing.JButton();
@@ -135,15 +134,15 @@ public class ReservaUI extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tableDados);
 
-        jLabel3.setText("ID cliente:");
+        jLabel3.setText("CPF cliente:");
 
         jLabel2.setText("Id:");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        txtfIdCliente.addActionListener(new java.awt.event.ActionListener() {
+        txtfCPFCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfIdClienteActionPerformed(evt);
+                txtfCPFClienteActionPerformed(evt);
             }
         });
 
@@ -261,7 +260,7 @@ public class ReservaUI extends javax.swing.JPanel {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jSpinnerMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(txtfId)
-                                .addComponent(txtfIdCliente))))
+                                .addComponent(txtfCPFCliente))))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtfLogging, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)))
@@ -289,7 +288,7 @@ public class ReservaUI extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtualizar)
                     .addComponent(jLabel3)
-                    .addComponent(txtfIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtfCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnExcluir)
@@ -328,9 +327,9 @@ public class ReservaUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtfIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfIdClienteActionPerformed
+    private void txtfCPFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCPFClienteActionPerformed
         // TODO add your handling code here:
-}//GEN-LAST:event_txtfIdClienteActionPerformed
+}//GEN-LAST:event_txtfCPFClienteActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         // TODO add your handling code here:
@@ -339,7 +338,7 @@ public class ReservaUI extends javax.swing.JPanel {
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         setControls(MODO_EDICAO);
         txtfId.setText("");
-        txtfIdCliente.setText("");
+        txtfCPFCliente.setText("");
         
         /* Rascunho, obter valor de agora */
         jSpinnerAno.setValue(2011);
@@ -354,13 +353,13 @@ public class ReservaUI extends javax.swing.JPanel {
 }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        int cpf = Integer.parseInt(txtfIdCliente.getText());
+        int cpf = Integer.parseInt(txtfCPFCliente.getText());
         Reserva reserva = (Reserva) new ReservaControl().pesquisar(cpf);
         if(reserva == null){
             txtfLogging.setText("Nenhuma reserva foi encontrada com a condicao.");
         }else{
             txtfId.setText("" + reserva.getId());
-            txtfIdCliente.setText("" + reserva.getId_cli());
+            txtfCPFCliente.setText("" + reserva.getCpf_cli());
 
             jSpinnerAno.setValue(reserva.getDataHora().getYear());
             jSpinnerMes.setValue(reserva.getDataHora().getMonth());
@@ -377,7 +376,7 @@ public class ReservaUI extends javax.swing.JPanel {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         setControls(!MODO_EDICAO);
         txtfId.setText("");
-        txtfIdCliente.setText("");
+        txtfCPFCliente.setText("");
 
         jSpinnerAno.setValue(2011);
         jSpinnerMes.setValue(12);
@@ -391,14 +390,20 @@ public class ReservaUI extends javax.swing.JPanel {
 }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if(cbbMesa.getSelectedIndex()==0){
+            txtfLogging.setText("Informe a mesa para a reserva.");
+            return;
+        }
+
         Reserva reserva = new Reserva(
                 // (int id, Date dataHora, String cpf_cli, int id_mesa, boolean penalizado, Date penalizado_ate)
-                Integer.parseInt(txtfId.getText()),
+                //Integer.parseInt(txtfId.getText()),
+                0,
                 new Date(),
-                Integer.parseInt(txtfIdCliente.getText()),
+                txtfCPFCliente.getText(),
                 cbbMesa.getSelectedIndex(),
                 false,
-                new Date() // penalizado ate
+                null//new Date() // penalizado ate
         );
 
         if (new ReservaControl().salvar(reserva)){
@@ -422,7 +427,7 @@ public class ReservaUI extends javax.swing.JPanel {
         if(btnNovo.isEnabled()){
             int linha = tableDados.getSelectedRow();
             txtfId.setText((String) tableDados.getValueAt(linha, 0));
-            txtfIdCliente.setText((String) tableDados.getValueAt(linha, 1));
+            txtfCPFCliente.setText((String) tableDados.getValueAt(linha, 1));
 
             jSpinnerAno.setValue(1);
             jSpinnerMes.setValue(2);
@@ -462,8 +467,8 @@ private void txtfIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private javax.swing.JSpinner jSpinnerMes;
     private javax.swing.JSpinner jSpinnerMinuto;
     private javax.swing.JTable tableDados;
+    private javax.swing.JTextField txtfCPFCliente;
     private javax.swing.JTextField txtfId;
-    private javax.swing.JTextField txtfIdCliente;
     private javax.swing.JTextField txtfLogging;
     // End of variables declaration//GEN-END:variables
 

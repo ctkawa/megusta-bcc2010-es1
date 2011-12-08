@@ -36,9 +36,10 @@ public class MesaDAOJavaSQL extends MesaDAO{
 
     @Override
     public boolean atualizar(Mesa mesa) {
-        String sql = "UPDATE mesa (id, capacidade) VALUES("
-                +mesa.getId()+"', '"
-                +mesa.getCapacidade()+"');";
+        String sql = "UPDATE mesa SET "
+                + " capacidade='"+mesa.getCapacidade()+"' "
+                + " WHERE id='"+mesa.getId()+"';";
+        System.out.println("Mandando comando SQL: "+sql);
         return getConexao().executeCommand(sql);
     }
 
@@ -51,7 +52,27 @@ public class MesaDAOJavaSQL extends MesaDAO{
 
     @Override
     public Mesa pesquisar(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String sql = "SELECT * FROM mesa WHERE id = '" + id + "';";
+        ConexaoJavaSQL conn = getConexao();
+        ResultSet resultSet = conn.executeQuery(sql);
+
+        try {
+            if(resultSet != null && resultSet.next()){
+                    Mesa mesa = new Mesa(
+                            Integer.parseInt(resultSet.getString("id")),
+                            Integer.parseInt(resultSet.getString("capacidade"))
+                            );
+                    return mesa;
+            }
+        } catch (SQLException e) {
+            StackTraceElement[] stack = e.getStackTrace();
+            if(stack.length > 0){
+                System.err.println("Message: " + e.getMessage());
+                System.err.println("Command: " + sql);
+                System.err.println("Exceprion: " + e);
+            }
+        }
+        return null;
     }
 
     @Override

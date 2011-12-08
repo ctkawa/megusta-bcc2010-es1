@@ -28,18 +28,21 @@ public class MesaUI extends javax.swing.JPanel {
         initComponents();
         carregarTabela();
         setControls(!MODO_EDICAO);
-        
+        //txtfID.setEnabled(false);
     }
 
     private void setControls(boolean isModoEdicao) {
         btnNovo.setEnabled(!isModoEdicao);
         btnAtualizar.setEnabled(!isModoEdicao);
-        //btnExcluir.setEnabled(!isModoEdicao);
-        btnExcluir.setEnabled(false);
         btnSalvar.setEnabled(isModoEdicao);
         btnCancelar.setEnabled(isModoEdicao);
         btnPesquisar.setEnabled(!isModoEdicao);
         tableMesa.setEnabled(!isModoEdicao);
+
+        btnExcluir.setEnabled(false);
+        btnAtualizar.setEnabled(false);
+        
+        txtfID.setEnabled(true);
     }
 
     private void carregarTabela() {
@@ -226,7 +229,28 @@ public class MesaUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        // TODO add your handling code here:
+        int cap, id;
+        try {
+            cap = Integer.parseInt(txtfCapacidade.getText());
+            id = Integer.parseInt(txtfID.getText());
+        } catch (NumberFormatException e) {
+            txtfLogging.setText("digite um numero no campo id e capacidade.");
+            return;
+        }
+
+        Mesa mesa = new Mesa(
+            //Integer.parseInt(txtfID.getText()),
+            id,
+            cap
+        );
+
+        if (new MesaControl().atualizar(mesa)){
+            txtfLogging.setText("A mesa foi atualizado com sucesso.");
+            setControls(!MODO_EDICAO);
+            carregarTabela();
+        }else{
+            txtfLogging.setText("A mesa nao pode ser atualizado.");
+        }
 }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void txtfLoggingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfLoggingActionPerformed
@@ -238,10 +262,19 @@ public class MesaUI extends javax.swing.JPanel {
         txtfID.setText("");
         txtfCapacidade.setText("");
         txtfLogging.setText("...");
+
+        txtfID.setEnabled(false);
 }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        int id = Integer.parseInt(txtfID.getText());
+        int id;
+        try {
+            id = Integer.parseInt(txtfID.getText());
+        } catch (NumberFormatException e) {
+            txtfLogging.setText("digite um numero no campo id.");
+            return;
+        }
+
         Mesa mesa = (Mesa) new MesaControl().pesquisar(id);
         if(mesa == null){
             txtfLogging.setText("Nenhuma mesa foi encontrada com a condicao.");
@@ -257,13 +290,22 @@ public class MesaUI extends javax.swing.JPanel {
         txtfID.setText("");
         txtfCapacidade.setText("");
         txtfLogging.setText("...");
+
+        txtfID.setEnabled(true);
 }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        int cap;
+        try {
+            cap = Integer.parseInt(txtfCapacidade.getText());
+        } catch (NumberFormatException e) {
+            txtfLogging.setText("digite um numero no campo capacidade.");
+            return;
+        }
         Mesa mesa = new Mesa(
             //Integer.parseInt(txtfID.getText()),
             0,
-            Integer.parseInt(txtfCapacidade.getText())
+            cap
         );
 
         if (new MesaControl().salvar(mesa)){
@@ -272,6 +314,7 @@ public class MesaUI extends javax.swing.JPanel {
             carregarTabela();
             txtfID.setText("");
             txtfCapacidade.setText("");
+            txtfID.setEnabled(true);
         }else{
             txtfLogging.setText("A mesa nao pode ser atualizada.");
         }
@@ -307,6 +350,7 @@ public class MesaUI extends javax.swing.JPanel {
             txtfID.setText((String) tableMesa.getValueAt(linha, 0));
             txtfCapacidade.setText((String) tableMesa.getValueAt(linha, 1));
             btnExcluir.setEnabled(true);
+            btnAtualizar.setEnabled(true);
         }
     }//GEN-LAST:event_tableMesaMouseClicked
 

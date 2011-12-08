@@ -30,25 +30,25 @@ public class ReservaDAOJavaSQL extends ReservaDAO{
     @Override
     public boolean salvar(Reserva reserva) {
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String sql = "INSERT INTO reserva (id, data, id_cli, id_mesa, penalizado, penalizado_ate) VALUES('"
-                /*+reserva.getId()*/+"', '"
+        String sql = "INSERT INTO reserva (data, cpf_cli, id_mesa, penalizado, penalizado_ate) VALUES('"
+                /*+reserva.getId()+"', '"*/
                 +sdf.format(reserva.getDataHora())+"', '"
-                +reserva.getId_cli()+"', '"
+                +reserva.getCpf_cli()+"', '"
                 +reserva.getId_mesa()+"', ";
-        sql += (reserva.isPenalizado()?"true":"false")+", '";
-        sql += (reserva.getPenalizado_ate()==null?"null":sdf.format(reserva.getPenalizado_ate()))+"');";
+        sql += (reserva.isPenalizado()?"true":"false")+", ";
+        sql += (reserva.getPenalizado_ate()==null?"null":"'"+sdf.format(reserva.getPenalizado_ate())+"'")+");";
         return getConexao().executeCommand(sql);
     }
 
     @Override
     public boolean atualizar(Reserva reserva) {
-        String sql = "UPDATE reserva (id, data, id_cli, id_mesa) VALUES("
-                +reserva.getId()+"', '"
-                +reserva.getDataHora()+"', '"
-                +reserva.getId_cli()+"', '"
-                +reserva.getId_mesa()+"', '";
-        sql += (reserva.isPenalizado()?"true":"false")+"', '";
-        sql += (reserva.getPenalizado_ate()==null?"null":reserva.getPenalizado_ate())+"');";
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sql = "UPDATE reserva SET "
+                + " data='"+sdf.format(reserva.getDataHora())+"', "
+                + " cpf_cli='"+reserva.getCpf_cli()+"', "
+                + " id_mesa='"+reserva.getId_mesa()+"'"
+                + " WHERE id='"+reserva.getId()+"';";
+        System.out.println("Mandando comando SQL: "+sql);
         return getConexao().executeCommand(sql);
     }
 
@@ -81,7 +81,7 @@ public class ReservaDAOJavaSQL extends ReservaDAO{
 
                     reserva[0] = resultSet.getString("id");
                     reserva[1] = resultSet.getString("data");
-                    reserva[2] = resultSet.getString("id_cli");
+                    reserva[2] = resultSet.getString("cpf_cli");
                     reserva[3] = resultSet.getString("id_mesa");
                     reserva[4] = resultSet.getString("penalizado");
                     reserva[5] = resultSet.getString("penalizado_ate");
