@@ -14,26 +14,26 @@ import java.util.Date;
 public class Reserva extends Entity{
     private int id;
     private Date dataHora;
-    private int id_cli;
+    private String cpf_cli;
     private int id_mesa;
     private boolean penalizado;
     private Date penalizado_ate;
 
-    public Reserva(int id, Date dataHora, int id_cli, int id_mesa, boolean penalizado, Date penalizado_ate) {
+    public Reserva(int id, Date dataHora, String cpf_cli, int id_mesa, boolean penalizado, Date penalizado_ate) {
         this.id = id;
         this.dataHora = dataHora;
-        this.id_cli = id_cli;
+        this.cpf_cli = cpf_cli;
         this.id_mesa = id_mesa;
         this.penalizado = penalizado;
         this.penalizado_ate = penalizado_ate;
     }
 
-    public int getId_cli() {
-        return id_cli;
+    public String getCpf_cli() {
+        return cpf_cli;
     }
 
-    public void setId_cli(int id_cli) {
-        this.id_cli = id_cli;
+    public void setCpf_cli(String cpf_cli) {
+        this.cpf_cli = cpf_cli;
     }
 
 

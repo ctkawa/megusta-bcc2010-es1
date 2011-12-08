@@ -37,10 +37,11 @@ public class ClienteDAOJavaSQL extends ClienteDAO{
 
     @Override
     public boolean atualizar(Cliente cliente) {
-        String sql = "UPDATE cliente (cpf, nome, telefone) VALUES("
-                +cliente.getCpf()+", '"
-                +cliente.getNome()+"', '"
-                +cliente.getTelefone()+"');";
+        String sql = "UPDATE cliente SET "
+                + " nome='"+cliente.getNome()+"', "
+                + " telefone='"+cliente.getTelefone()+"' "
+                + " WHERE cpf='"+cliente.getCpf()+"';";
+        System.out.println("Mandando comando SQL: "+sql);
         return getConexao().executeCommand(sql);
     }
 
