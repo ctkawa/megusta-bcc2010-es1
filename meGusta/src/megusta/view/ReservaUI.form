@@ -273,11 +273,12 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbMesaActionPerformed"/>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cbbMesaFocusGained"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mesa:"/>
+        <Property name="text" type="java.lang.String" value="Poltronas:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
