@@ -48,7 +48,7 @@ public class ClienteUI extends javax.swing.JPanel {
 
     private void carregarTabela() {
         String[][] clientes = new ClienteControl().pesquisar("");
-        String[] colunas = {"Nome", "CPF", "Telefone"};
+        String[] colunas = {"CPF", "Nome", "Telefone"};
         tableFuncionario.setModel(
             new DefaultTableModel(clientes, colunas) {
                 @Override
@@ -266,7 +266,19 @@ public class ClienteUI extends javax.swing.JPanel {
 }//GEN-LAST:event_txtfCPFActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        // TODO add your handling code here:
+        Cliente cliente = new Cliente(
+                txtfCPF.getText(),
+                txtfNome.getText(),
+                txtfTelefone.getText()
+        );
+
+        if (new ClienteControl().atualizar(cliente)){
+            txtfLogging.setText("O cliente foi atualizado com sucesso.");
+            setControls(!MODO_EDICAO);
+            carregarTabela();
+        }else{
+            txtfLogging.setText("O cliente nao pode ser atualizado.");
+        }
 }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -315,7 +327,23 @@ public class ClienteUI extends javax.swing.JPanel {
 }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        //if ( new ClienteControl().excluir(cliente));
+        Cliente cliente = new Cliente(
+                txtfCPF.getText(),
+                txtfNome.getText(),
+                txtfTelefone.getText()
+        );
+
+        if (new ClienteControl().excluir(cliente)){
+            txtfLogging.setText("o cliente foi excluido com sucesso.");
+            setControls(!MODO_EDICAO);
+            carregarTabela();
+            btnExcluir.setEnabled(false);
+            txtfNome.setText("");
+            txtfCPF.setText("");
+            txtfTelefone.setText("");
+        }else{
+            txtfLogging.setText("O cliente nao pode ser excluido.");
+        }
 }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void tableFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableFuncionarioMouseClicked

@@ -79,14 +79,14 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="6" max="-2" attributes="0"/>
-                  <EmptySpace pref="512" max="32767" attributes="0"/>
+                  <EmptySpace pref="514" max="32767" attributes="0"/>
               </Group>
           </Group>
           <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
                   <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="518" max="32767" attributes="0"/>
+                  <EmptySpace pref="520" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -278,7 +278,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Poltronas:"/>
+        <Property name="text" type="java.lang.String" value="Qtd. pessoas:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
